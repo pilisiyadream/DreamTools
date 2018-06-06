@@ -11,10 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pilisiya.dreamtools.R;
+import com.pilisiya.dreamtools.listener.IBackListener;
 
 import java.util.HashMap;
 
 /**
+ * 【通用消息提示框】
  * Created by xujiang on 2018/6/6.
  */
 
@@ -47,8 +49,7 @@ public class DreamDialogFactory {
         }
     }
 
-    private static Dialog createDialog(final Activity activity) {
-
+    private static Dialog createDialog(final Activity activity, final IBackListener backListener) {
         dismissAlert(activity);
         Dialog dialog = new Dialog(activity, R.style.dialog_basic);
         dialog.setContentView(R.layout.dialog_show_tip);
@@ -68,6 +69,7 @@ public class DreamDialogFactory {
                 if (keyCode == KeyEvent.KEYCODE_SEARCH) {
                     return true;
                 } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    backListener.onBack();
                     dialog.dismiss();
                     return false;
                 } else {
@@ -80,87 +82,53 @@ public class DreamDialogFactory {
     }
 
     /**
-     * @param context
-     * @param title
-     * @param msg
-     * @param okStr
-     * @param okClick
+     * 【消息确认提示框，只有确认按钮，按返回键取消提示框】
+     *
+     * @param context Activity
+     * @param title   标题
+     * @param msg     提示信息
+     * @param okStr   确认按钮
+     * @param okClick 确认按钮事件
      */
-    public static void showMessage(final Activity context, String title, String msg, String okStr,
-                                   final View.OnClickListener okClick) {
+    public static void showConfirmMessage(final Activity context, String title, String msg, String okStr,
+                                          final View.OnClickListener okClick, final IBackListener backListener) {
         clearBeforeDialog(context);
-        Dialog dialog = createDialog(context);
+        Dialog dialog = createDialog(context, backListener);
         llBtn.setVisibility(View.VISIBLE);
         tvCount.setVisibility(View.GONE);
         tvTitle.setText(title);
         tvMsg.setText(msg);
         tvOk.setText(okStr);
-        tvCancel.setVisibility(View.VISIBLE);
+        tvCancel.setVisibility(View.GONE);
         tvOk.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // dismissAlert(context);
+                dismissAlert(context);
                 if (null != okClick) {
                     okClick.onClick(v);
                 }
             }
         });
-        tvCancel.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                // dismissAlert(context);
-            }
-        });
         dialog.show();
+        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);//屏蔽HOME键
     }
 
-    public static void showConfirmMessage(final Activity context, String title, String msg) {
-        clearBeforeDialog(context);
-        Dialog dialog = createDialog(context);
-        llBtn.setVisibility(View.VISIBLE);
-        tvCount.setVisibility(View.GONE);
-        tvTitle.setText(title);
-        tvMsg.setText(msg);
-        tvOk.setText("确认");
-        tvCancel.setVisibility(View.GONE);
-        tvOk.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dismissAlert(context);
-            }
-        });
-        dialog.show();
-    }
-
-    public static void showConfirmMessage(final Activity context, String title, String msg, String okStr) {
-        clearBeforeDialog(context);
-        Dialog dialog = createDialog(context);
-        llBtn.setVisibility(View.VISIBLE);
-        tvCount.setVisibility(View.GONE);
-        tvTitle.setText(title);
-        tvMsg.setText(msg);
-        tvOk.setText(okStr);
-        tvCancel.setVisibility(View.GONE);
-        tvOk.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dismissAlert(context);
-            }
-        });
-        dialog.show();
-    }
-
-    public static void showTipsMessage(final Activity context, String title, String msg, String okStr
-    ) {
-        loadingTimer = new CountDownTimer(3000, 1000) {
+    /**
+     * 【倒计时提示框】
+     *
+     * @param context      Activity
+     * @param msg          消息
+     * @param timeout      倒计时事件
+     * @param backListener 取消事件
+     */
+    public static void showTipsMessage(final Activity context, String msg, int timeout, IBackListener backListener) {
+        tvCount.setText(timeout / 1000);
+        loadingTimer = new CountDownTimer(timeout, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
+                tvCount.setText((millisUntilFinished / 1000) + "");
             }
 
             @Override
@@ -170,57 +138,29 @@ public class DreamDialogFactory {
         };
         loadingTimer.start();
         clearBeforeDialog(context);
-        Dialog dialog = createDialog(context);
-        llBtn.setVisibility(View.VISIBLE);
-        tvCount.setVisibility(View.GONE);
-        tvTitle.setText(title);
+        Dialog dialog = createDialog(context, backListener);
+        llBtn.setVisibility(View.GONE);
+        tvCount.setVisibility(View.VISIBLE);
+        tvTitle.setVisibility(View.GONE);
         tvMsg.setText(msg);
-        tvOk.setText(okStr);
-        tvCancel.setVisibility(View.GONE);
-        tvOk.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dismissAlert(context);
-            }
-        });
         dialog.show();
+        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);//屏蔽HOME键
     }
+
 
     /**
-     * @param context
-     * @param title
-     * @param msg
-     * @param okStr
-     * @param okClick
+     * 【消息确认提示框，只有一个确认按钮，且屏蔽HOME键和返回键】
+     *
+     * @param context Activity
+     * @param title   标题
+     * @param msg     提示消息
+     * @param okStr   确认按钮
+     * @param okClick 确认按钮事件
      */
-    public static void showConfirmMessage(final Activity context, String title, String msg, String okStr,
-                                          final View.OnClickListener okClick) {
+    public static void showMainComfirmMessage(final Activity context, String title, String msg, String okStr,
+                                              final View.OnClickListener okClick, IBackListener backListener) {
         clearBeforeDialog(context);
-        Dialog dialog = createDialog(context);
-        llBtn.setVisibility(View.VISIBLE);
-        tvCount.setVisibility(View.GONE);
-        tvTitle.setText(title);
-        tvMsg.setText(msg);
-        tvOk.setText(okStr);
-        tvCancel.setVisibility(View.GONE);
-        tvOk.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dismissAlert(context);
-                if (null != okClick) {
-                    okClick.onClick(v);
-                }
-            }
-        });
-        dialog.show();
-    }
-
-    public static void showMainComfirm(final Activity context, String title, String msg, String okStr,
-                                       final View.OnClickListener okClick) {
-        clearBeforeDialog(context);
-        Dialog dialog = createDialog(context);
+        Dialog dialog = createDialog(context, backListener);
         llBtn.setVisibility(View.VISIBLE);
         tvCount.setVisibility(View.GONE);
         tvTitle.setText(title);
@@ -250,26 +190,26 @@ public class DreamDialogFactory {
 
 
     /**
-     * 弹框左右2按钮
+     * 【消息提示框，确认取消按钮】
      *
-     * @param context
-     * @param title
-     * @param msg
-     * @param okStr
-     * @param cancleStr
-     * @param okClick
-     * @param cancleClick
+     * @param context     Activity
+     * @param title       标题
+     * @param msg         提示消息
+     * @param okStr       确认
+     * @param cancleStr   取消
+     * @param okClick     确认按钮事件
+     * @param cancleClick 取消按钮事件
      */
     public static void showConfirmMessage(final Activity context, String title, String msg, String okStr,
-                                          String cancleStr, final View.OnClickListener okClick, final View.OnClickListener cancleClick
-    ) {
+                                          String cancleStr, final View.OnClickListener okClick, final View.OnClickListener cancleClick, IBackListener backListener) {
         clearBeforeDialog(context);
-        Dialog dialog = createDialog(context);
+        Dialog dialog = createDialog(context, backListener);
         llBtn.setVisibility(View.VISIBLE);
         tvCount.setVisibility(View.GONE);
         tvTitle.setText(title);
         tvMsg.setText(msg);
         tvOk.setText(okStr);
+        tvCancel.setText(cancleStr);
         tvOk.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -291,13 +231,14 @@ public class DreamDialogFactory {
             }
         });
         dialog.show();
+        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
     /**
      * @param activity
      */
     public static void clearBeforeDialog(Activity activity) {
-        Dialog dialog = (Dialog) dialogs.get(activity.toString());
+        Dialog dialog = dialogs.get(activity.toString());
         if (null != dialog && dialog.isShowing()) {
             try {
                 dialog.dismiss();
