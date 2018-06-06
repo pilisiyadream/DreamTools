@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+    <RelativeLayout 
+        android:layout_width="300dp"
+        android:layout_height="55dp" >
+        <TextView 
+            android:id="@+id/dialog_tip_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            style="@style/blue_0180c6_21_left"
+            android:text="标题" />
+        <TextView 
+            android:id="@+id/dialog_tip_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:visibility="gone"
+            style="@style/red_ff2600_21_right"
+            android:text="60" />
+    </RelativeLayout>
+    <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/blue_00b4f0"/>
+    <TextView 
+        android:id="@+id/dialog_tip_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minLines="3"
+        android:layout_margin="10dp"
+        style="@style/black_333333_18_center"
+        android:text="内容" />
+    <LinearLayout 
+        android:id="@+id/dialog_btn_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:gravity="center" >
+        <TextView 
+            android:id="@+id/dialog_tip_cancel_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/cancel_btn_bg"
+            style="@style/white_22_center"
+            android:text="取消" />
+        <TextView 
+            android:id="@+id/dialog_tip_confirm_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/confirm_btn_bg"
+            style="@style/white_22_center"
+            android:text="确定" />
+    </LinearLayout>
+
+</LinearLayout>

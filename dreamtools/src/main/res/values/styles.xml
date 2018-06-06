@@ -1,0 +1,41 @@
+<resources>
+
+    <style name="dialog_basic" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 是否模糊 -->
+        <item name="android:windowBackground">@color/transparent_white</item>
+        <!-- 背景透明 -->
+    </style>
+
+    <style name="blue_0180c6_21_left">
+        <item name="android:textColor">@color/blue_0180c6</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="red_ff2600_21_right">
+        <item name="android:textColor">@color/red_ff2600</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="black_333333_18_center">
+        <item name="android:textColor">@color/balck_333333</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="white_22_center">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>
