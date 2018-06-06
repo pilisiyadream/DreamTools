@@ -1,8 +1,11 @@
 package com.pilisiya.dreamtools;
 
 import android.content.Context;
+import android.os.CountDownTimer;
+import android.os.Looper;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,5 +25,21 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.pilisiya.dreamtools.test", appContext.getPackageName());
+    }
+
+    @Test
+    public void test() {
+        Looper.prepare();
+        CountDownTimer time = new CountDownTimer(3000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                Log.e("xj", "millisUntilFinished:" + millisUntilFinished);
+            }
+
+            @Override
+            public void onFinish() {
+                Log.e("xj", "---onFinish---");
+            }
+        }.start();
     }
 }

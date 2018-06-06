@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -62,19 +63,15 @@ public class DreamDialogFactory {
         tvMsg = dialog.findViewById(R.id.dialog_tip_content);
         tvOk = dialog.findViewById(R.id.dialog_tip_confirm_btn);
         tvCancel = dialog.findViewById(R.id.dialog_tip_cancel_btn);
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_SEARCH) {
-                    return true;
-                } else if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    backListener.onBack();
-                    dialog.dismiss();
-                    return false;
-                } else {
-                    return false;
-                }
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+                backListener.onBack();
+                dialog1.dismiss();
+                return false;
+            } else {
+                return false;
             }
         });
         dialog.setCanceledOnTouchOutside(false);
@@ -100,14 +97,10 @@ public class DreamDialogFactory {
         tvMsg.setText(msg);
         tvOk.setText(okStr);
         tvCancel.setVisibility(View.GONE);
-        tvOk.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dismissAlert(context);
-                if (null != okClick) {
-                    okClick.onClick(v);
-                }
+        tvOk.setOnClickListener(v -> {
+            dismissAlert(context);
+            if (null != okClick) {
+                okClick.onClick(v);
             }
         });
         dialog.show();
@@ -119,12 +112,13 @@ public class DreamDialogFactory {
      *
      * @param context      Activity
      * @param msg          消息
-     * @param timeout      倒计时事件
+     * @param timeout      倒计时时间
      * @param backListener 取消事件
      */
-    public static void showTipsMessage(final Activity context, String msg, int timeout, IBackListener backListener) {
+    public static void showTipsMessage(final Activity context, String msg, int timeout, boolean isShowComfirm, IBackListener backListener) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog(context, backListener);
         loadingTimer = new CountDownTimer(timeout, 1000) {
-
             @Override
             public void onTick(long millisUntilFinished) {
                 tvCount.setText((millisUntilFinished / 1000) + "");
@@ -135,15 +129,20 @@ public class DreamDialogFactory {
                 dismissAlert(context);
             }
         };
-        loadingTimer.start();
-        clearBeforeDialog(context);
-        Dialog dialog = createDialog(context, backListener);
-        llBtn.setVisibility(View.GONE);
+        llBtn.setVisibility(View.VISIBLE);
         tvCount.setVisibility(View.VISIBLE);
         tvCount.setText((timeout / 1000) + "");
         tvTitle.setVisibility(View.GONE);
         tvMsg.setText(msg);
+        tvCancel.setVisibility(View.GONE);
+        if (isShowComfirm) {
+            tvOk.setVisibility(View.VISIBLE);
+            tvOk.setOnClickListener(v -> dismissAlert(context));
+        } else {
+            llBtn.setVisibility(View.GONE);
+        }
         dialog.show();
+        loadingTimer.start();
         dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);//屏蔽HOME键
     }
 
@@ -167,23 +166,13 @@ public class DreamDialogFactory {
         tvMsg.setText(msg);
         tvOk.setText(okStr);
         tvCancel.setVisibility(View.GONE);
-        tvOk.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dismissAlert(context);
-                if (null != okClick) {
-                    okClick.onClick(v);
-                }
+        tvOk.setOnClickListener(v -> {
+            dismissAlert(context);
+            if (null != okClick) {
+                okClick.onClick(v);
             }
         });
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                return false;
-            }
-        });
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
         dialog.show();
         dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
@@ -210,24 +199,16 @@ public class DreamDialogFactory {
         tvMsg.setText(msg);
         tvOk.setText(okStr);
         tvCancel.setText(cancleStr);
-        tvOk.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dismissAlert(context);
-                if (null != okClick) {
-                    okClick.onClick(v);
-                }
+        tvOk.setOnClickListener(v -> {
+            dismissAlert(context);
+            if (null != okClick) {
+                okClick.onClick(v);
             }
         });
-        tvCancel.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dismissAlert(context);
-                if (null != cancleClick) {
-                    cancleClick.onClick(v);
-                }
+        tvCancel.setOnClickListener(v -> {
+            dismissAlert(context);
+            if (null != cancleClick) {
+                cancleClick.onClick(v);
             }
         });
         dialog.show();
