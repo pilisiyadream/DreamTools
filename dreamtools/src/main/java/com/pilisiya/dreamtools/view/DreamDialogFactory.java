@@ -123,7 +123,6 @@ public class DreamDialogFactory {
      * @param backListener 取消事件
      */
     public static void showTipsMessage(final Activity context, String msg, int timeout, IBackListener backListener) {
-        tvCount.setText(timeout / 1000);
         loadingTimer = new CountDownTimer(timeout, 1000) {
 
             @Override
@@ -141,6 +140,7 @@ public class DreamDialogFactory {
         Dialog dialog = createDialog(context, backListener);
         llBtn.setVisibility(View.GONE);
         tvCount.setVisibility(View.VISIBLE);
+        tvCount.setText((timeout / 1000) + "");
         tvTitle.setVisibility(View.GONE);
         tvMsg.setText(msg);
         dialog.show();
