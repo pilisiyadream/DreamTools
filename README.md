@@ -22,6 +22,7 @@
   Step 3.use it in your project
   
       DreamDialogFactory.showTipsMessage(MainActivity.this, "提示", "倒计时弹窗提示信息！", 10000, false);
+      
  
    
        
