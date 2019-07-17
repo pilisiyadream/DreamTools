@@ -4,30 +4,131 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context="com.pilisiya.dream.MainActivity">
 
-    <Button
-        android:id="@+id/btn_1"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="150px"
-        android:text="倒计时弹窗" />
+        android:layout_height="50dp"
+        android:background="#2a2a2a"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="通用设置|UI"
+        android:textColor="@color/white" />
 
-    <Button
-        android:id="@+id/btn_2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150px"
-        android:text="只有确认键弹窗" />
+        android:layout_height="45dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_3"
-        android:layout_width="match_parent"
-        android:layout_height="150px"
-        android:text="只含确认键，屏蔽系统键" />
+        <Button
+            android:id="@+id/btn_1"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="倒计时弹窗" />
 
-    <Button
-        android:id="@+id/btn_4"
+        <Button
+            android:id="@+id/btn_2"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="只有确认键弹窗" />
+
+        <Button
+            android:id="@+id/btn_3"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="只含确认键，屏蔽系统键" />
+
+        <Button
+            android:id="@+id/btn_4"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="普通弹框" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150px"
-        android:text="普通弹框" />
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_5"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="关闭下拉菜单" />
+
+        <Button
+            android:id="@+id/btn_6"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="打开下拉菜单" />
+
+        <Button
+            android:id="@+id/btn_7"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="升级固件" />
+
+        <Button
+            android:id="@+id/btn_8"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="开启网络数据加载" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_9"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="关闭网络数据加载" />
+
+        <Button
+            android:id="@+id/btn_10"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="xxxxxxxxxxxxxxxx" />
+
+        <Button
+            android:id="@+id/btn_11"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="xxxxxxxxxxxxx" />
+
+        <Button
+            android:id="@+id/btn_12"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="xxxxxxxxxxxxx" />
+    </LinearLayout>
 
 </LinearLayout>

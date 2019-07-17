@@ -15,7 +15,7 @@
     </style>
 
     <style name="blue_0180c6_21_left">
-        <item name="android:textColor">@color/blue_0180c6</item>
+        <item name="android:textColor">@color/blue_045987</item>
         <item name="android:textSize">21sp</item>
         <item name="android:gravity">left</item>
     </style>
@@ -36,6 +36,11 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">22sp</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="progress_wait" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_wait</item>
     </style>
 
 </resources>

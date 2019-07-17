@@ -8,11 +8,14 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.pilisiya.dreamtools.R;
 import com.pilisiya.dreamtools.listener.IBackListener;
+import com.pilisiya.dreamtools.util.CustomWindowFlag;
 
 import java.util.HashMap;
 
@@ -31,6 +34,8 @@ public class DreamDialogFactory {
     private static TextView tvMsg;
     private static TextView tvOk;
     private static TextView tvCancel;
+    private static ProgressBar progressBar;
+    private static ImageView line;
     private static CountDownTimer loadingTimer = null;
 
     public static boolean dismissAlert(Activity activity) {
@@ -58,12 +63,13 @@ public class DreamDialogFactory {
         dialog.setContentView(R.layout.dialog_show_tip);
         dialog.setCancelable(false);
         dialogs.put(activity.toString(), dialog);
-
         tvTitle = dialog.findViewById(R.id.dialog_tip_title);
         tvCount = dialog.findViewById(R.id.dialog_tip_time);
         llBtn = dialog.findViewById(R.id.dialog_btn_ll);
         tvMsg = dialog.findViewById(R.id.dialog_tip_content);
         tvOk = dialog.findViewById(R.id.dialog_tip_confirm_btn);
+        progressBar = dialog.findViewById(R.id.bar_progress);
+        line = dialog.findViewById(R.id.line);
         tvCancel = dialog.findViewById(R.id.dialog_tip_cancel_btn);
         dialog.setOnKeyListener((dialog1, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_SEARCH) {
@@ -106,7 +112,8 @@ public class DreamDialogFactory {
         });
         dialog.show();
         //屏蔽HOME键
-        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+        //dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
     /**
@@ -147,7 +154,32 @@ public class DreamDialogFactory {
         dialog.show();
         loadingTimer.start();
         //屏蔽HOME键
-        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+        // dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+    }
+
+
+    /**
+     * 【网络数据加载】
+     *
+     * @param context Activity
+     * @param msg     消息
+     */
+    public static void showWebLoading(final Activity context, String title, String msg) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog(context);
+        llBtn.setVisibility(View.GONE);
+        tvCount.setVisibility(View.GONE);
+        tvTitle.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        line.setVisibility(View.GONE);
+        tvTitle.setText(title);
+        tvMsg.setText(msg);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+        dialog.show();
+        //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+       // dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
 
@@ -178,7 +210,9 @@ public class DreamDialogFactory {
         });
         dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
         dialog.show();
-        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        //屏蔽HOME键盘
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+        //dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
 
@@ -216,7 +250,8 @@ public class DreamDialogFactory {
             }
         });
         dialog.show();
-        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+        //dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
     /**
