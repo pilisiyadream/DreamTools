@@ -1,4 +1,4 @@
-package com.baidu.tts.sample.util;
+package com.pilisiya.dreamtools.tts.util;
 
 import android.content.Context;
 import android.content.res.AssetManager;

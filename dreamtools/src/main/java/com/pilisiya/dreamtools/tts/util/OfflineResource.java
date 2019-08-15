@@ -1,4 +1,4 @@
-package com.baidu.tts.sample.util;
+package com.pilisiya.dreamtools.tts.util;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -17,14 +17,9 @@ import static android.content.ContentValues.TAG;
 public class OfflineResource {
 
     public static final String VOICE_FEMALE = "F";
-
     public static final String VOICE_MALE = "M";
-
-
     public static final String VOICE_DUYY = "Y";
-
     public static final String VOICE_DUXY = "X";
-
     private static final String SAMPLE_DIR = "baiduTTS";
 
     private AssetManager assets;
@@ -73,7 +68,8 @@ public class OfflineResource {
     private String copyAssetsFile(String sourceFilename) throws IOException {
         String destFilename = destPath + "/" + sourceFilename;
         boolean recover = false;
-        Boolean existed = mapInitied.get(sourceFilename); // 启动时完全覆盖一次
+        // 启动时完全覆盖一次
+        Boolean existed = mapInitied.get(sourceFilename);
         if (existed == null || !existed) {
             recover = true;
         }

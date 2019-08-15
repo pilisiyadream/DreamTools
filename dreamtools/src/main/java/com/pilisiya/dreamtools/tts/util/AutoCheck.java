@@ -1,4 +1,4 @@
-package com.baidu.tts.sample.util;
+package com.pilisiya.dreamtools.tts.util;
 
 import android.Manifest;
 import android.content.Context;
@@ -9,10 +9,8 @@ import android.support.v4.content.ContextCompat;
 
 import com.baidu.tts.client.SpeechSynthesizer;
 import com.baidu.tts.client.TtsMode;
-import com.baidu.tts.sample.control.InitConfig;
-
+import com.pilisiya.dreamtools.tts.control.InitConfig;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
@@ -26,39 +24,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeSet;
 
-/**
- * Created by fujiayi on 2017/12/28.
- */
-
-/**
- * 自动排查工具，用于集成后发现错误。
- * <p>
- * 可以检测如下错误：
- * 1. PermissionCheck ： AndroidManifest,xml 需要的部分权限
- * 2. JniCheck： 检测so文件是否安装在指定目录
- * 3. AppInfoCheck: 联网情况下 , 检测appId appKey secretKey是否正确
- * 4. ApplicationIdCheck: 显示包名applicationId， 提示用户手动去官网检查
- * 5. ParamKeyExistCheck： 检查key是否存在，目前检查 SpeechSynthesizer.PARAM_TTS_TEXT_MODEL_FILE
- * 和PARAM_TTS_SPEECH_MODEL_FILE
- * 6.  OfflineResourceFileCheck 检查离线资源文件（需要从assets目录下复制），是否存在
- * <p>
- * <p>
- * 示例使用代码：
- * AutoCheck.getInstance(getApplicationContext()).check(initConfig, new Handler() {
- *
- * @Override public void handleMessage(Message msg) {
- * if (msg.what == 100) {
- * AutoCheck autoCheck = (AutoCheck) msg.obj;
- * synchronized (autoCheck) {
- * String message = autoCheck.obtainDebugMessage();
- * toPrint(message); // 可以用下面一行替代，在logcat中查看代码
- * //Log.w("AutoCheckMessage",message);
- * }
- * }
- * }
- * <p>
- * });
- */
 public class AutoCheck {
 
     private static AutoCheck instance;
@@ -84,15 +49,13 @@ public class AutoCheck {
     }
 
     public void check(final InitConfig initConfig, final Handler handler) {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                AutoCheck obj = innerCheck(initConfig);
-                isFinished = true;
-                synchronized (obj) { // 偶发，同步线程信息
-                    Message msg = handler.obtainMessage(100, obj);
-                    handler.sendMessage(msg);
-                }
+        Thread t = new Thread(() -> {
+            AutoCheck obj = innerCheck(initConfig);
+            isFinished = true;
+            // 偶发，同步线程信息
+            synchronized (obj) {
+                Message msg = handler.obtainMessage(100, obj);
+                handler.sendMessage(msg);
             }
         });
         t.start();

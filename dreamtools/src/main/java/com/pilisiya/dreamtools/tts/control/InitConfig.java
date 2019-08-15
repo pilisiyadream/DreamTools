@@ -1,5 +1,4 @@
-package com.baidu.tts.sample.control;
-
+package com.pilisiya.dreamtools.tts.control;
 import com.baidu.tts.client.SpeechSynthesizerListener;
 import com.baidu.tts.client.TtsMode;
 

@@ -1,10 +1,10 @@
-package com.baidu.tts.sample.listener;
+package com.pilisiya.dreamtools.tts.listener;
 
 import android.util.Log;
 
 import com.baidu.tts.client.SpeechError;
 import com.baidu.tts.client.SpeechSynthesizerListener;
-import com.baidu.tts.sample.MainHandlerConstant;
+import com.pilisiya.dreamtools.tts.MainHandlerConstant;
 
 /**
  * SpeechSynthesizerListener 简单地实现，仅仅记录日志

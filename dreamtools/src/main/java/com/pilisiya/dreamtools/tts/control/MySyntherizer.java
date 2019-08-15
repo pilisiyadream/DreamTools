@@ -1,4 +1,4 @@
-package com.baidu.tts.sample.control;
+package com.pilisiya.dreamtools.tts.control;
 
 import android.content.Context;
 import android.os.Handler;
@@ -10,7 +10,7 @@ import com.baidu.tts.auth.AuthInfo;
 import com.baidu.tts.client.SpeechSynthesizeBag;
 import com.baidu.tts.client.SpeechSynthesizer;
 import com.baidu.tts.client.TtsMode;
-import com.baidu.tts.sample.MainHandlerConstant;
+import com.pilisiya.dreamtools.tts.MainHandlerConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -201,7 +201,8 @@ public class MySyntherizer implements MainHandlerConstant {
 
     protected void sendToUiThread(int action, String message) {
         Log.i(TAG, message);
-        if (mainHandler == null) { // 可以不依赖mainHandler
+        // 可以不依赖mainHandler
+        if (mainHandler == null) {
             return;
         }
         Message msg = Message.obtain();

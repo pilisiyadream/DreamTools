@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.pilisiya.dreamtools.tts.SpeakUtil;
 import com.pilisiya.dreamtools.util.DropDownUtil;
 import com.pilisiya.dreamtools.view.DreamDialogFactory;
 import com.smartpos.offlineinstall.OfflineInstallApi;
@@ -62,16 +63,7 @@ public class MainActivity extends AppCompatActivity {
         btn_5.setOnClickListener(v -> DropDownUtil.forbidDropDown(MainActivity.this));
         btn_6 = findViewById(R.id.btn_6);
         btn_6.setOnClickListener(v -> DropDownUtil.forbidStatusBar(MainActivity.this));
-
         btn_7 = findViewById(R.id.btn_7);
-        btn_8 = findViewById(R.id.btn_8);
-
-
-        btn_8.setOnClickListener(v -> {
-            DreamDialogFactory.showWebLoading(MainActivity.this, "提示", "加载中,请稍后......");
-            handler.sendEmptyMessageDelayed(TIME_OUT, 40000);
-        });
-
         btn_7.setOnClickListener(v -> {
             OfflineInstallApi install = new OfflineInstallApi();
             try {
@@ -106,10 +98,24 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("MainActivity", e.getMessage());
             }
         });
-
-
+        btn_8 = findViewById(R.id.btn_8);
+        btn_8.setOnClickListener(v -> {
+            DreamDialogFactory.showWebLoading(MainActivity.this, "提示", "加载中,请稍后......");
+            handler.sendEmptyMessageDelayed(TIME_OUT, 40000);
+        });
         btn_9 = findViewById(R.id.btn_9);
         btn_9.setOnClickListener(v -> DreamDialogFactory.dismissAlert(MainActivity.this));
+        Handler mainHandle = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                Log.e("xj", "信息：" + msg.arg1);
+            }
+        };
+        btn_10 = findViewById(R.id.btn_10);
+        btn_10.setOnClickListener(v -> {
+            SpeakUtil.getInstance().speak("欢迎使用百度语音服务");
+        });
 
 
     }

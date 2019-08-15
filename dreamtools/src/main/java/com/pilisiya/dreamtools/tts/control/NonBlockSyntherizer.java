@@ -1,4 +1,4 @@
-package com.baidu.tts.sample.control;
+package com.pilisiya.dreamtools.tts.control;
 
 import android.content.Context;
 import android.os.Build;
