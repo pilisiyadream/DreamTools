@@ -15,7 +15,7 @@
   Step 2. Add the dependency
   
        dependencies {
-            implementation 'com.github.pilisiyadream:DreamTools:v1.5'
+            implementation 'com.github.pilisiyadream:DreamTools:v1.0.5'
        }
    
    
