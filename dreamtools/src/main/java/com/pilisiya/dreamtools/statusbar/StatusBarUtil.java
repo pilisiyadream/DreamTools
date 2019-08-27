@@ -41,7 +41,7 @@ public class StatusBarUtil {
      *
      * @param activity
      */
-    public void setStatusBarUpColor(Activity activity) {
+    public static  void setStatusBarUpColor(Activity activity) {
         //当FitsSystemWindows设置 true 时，会在屏幕最上方预留出状态栏高度的 padding
         StatusBarUtil.setRootViewFitsSystemWindows(activity, true);
         //设置状态栏透明
