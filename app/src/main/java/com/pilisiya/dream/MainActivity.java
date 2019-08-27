@@ -1,24 +1,19 @@
 package com.pilisiya.dream;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
-import com.pilisiya.dreamtools.tts.SpeakUtil;
 import com.pilisiya.dreamtools.util.DropDownUtil;
 import com.pilisiya.dreamtools.view.DreamDialogFactory;
 import com.smartpos.offlineinstall.OfflineInstallApi;
 import com.smartpos.offlineinstall.ServiceDeathException;
 import com.smartpos.offlineinstall.aidl.OSTask;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
         };
         btn_10 = findViewById(R.id.btn_10);
         btn_10.setOnClickListener(v -> {
-            SpeakUtil.getInstance().speak("欢迎使用百度语音服务");
         });
 
 
