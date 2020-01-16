@@ -6,8 +6,10 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
+import com.orhanobut.logger.Logger;
 import com.pilisiya.dreamtools.util.DropDownUtil;
 import com.pilisiya.dreamtools.view.DreamDialogFactory;
 import com.smartpos.offlineinstall.OfflineInstallApi;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Logger.d("onCreate");
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -95,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         });
         btn_8 = findViewById(R.id.btn_8);
         btn_8.setOnClickListener(v -> {
+            Logger.d("按钮8被点击了");
             DreamDialogFactory.showWebLoading(MainActivity.this, "提示", "加载中,请稍后......");
             handler.sendEmptyMessageDelayed(TIME_OUT, 40000);
         });
@@ -109,6 +113,20 @@ public class MainActivity extends AppCompatActivity {
         };
         btn_10 = findViewById(R.id.btn_10);
         btn_10.setOnClickListener(v -> {
+
+        });
+        btn_11 = findViewById(R.id.btn_11);
+        btn_11.setOnClickListener(v -> {
+
+        });
+        btn_12 = findViewById(R.id.btn_12);
+        btn_12.setOnClickListener(v -> {
+            DreamDialogFactory.showInputPass(MainActivity.this, "请输入密码", "19981999", "确认", "取消", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         });
 
 
