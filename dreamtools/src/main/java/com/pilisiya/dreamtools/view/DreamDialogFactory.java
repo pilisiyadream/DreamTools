@@ -285,6 +285,60 @@ public class DreamDialogFactory {
         //dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
+
+    /**
+     * 【消息提示框，确认取消按钮】
+     *
+     * @param context     Activity
+     * @param title       标题
+     * @param msg         提示消息
+     * @param okStr       确认
+     * @param cancleStr   取消
+     * @param okClick     确认按钮事件
+     * @param cancleClick 取消按钮事件
+     */
+    public static void showCustomMessage(final Activity context, int timeout, String title, String msg, String okStr,
+                                         String cancleStr, final View.OnClickListener okClick, final View.OnClickListener cancleClick) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog(context);
+        tvCount.setVisibility(View.VISIBLE);
+        tvCount.setText((timeout / 1000) + "");
+        loadingTimer = new CountDownTimer(timeout, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tvCount.setText((millisUntilFinished / 1000) + "");
+            }
+
+            @Override
+            public void onFinish() {
+                dismissAlert(context);
+                if (null != okClick) {
+                    okClick.onClick(tvOk);
+                }
+            }
+        };
+        llBtn.setVisibility(View.VISIBLE);
+        tvTitle.setText(title);
+        tvMsg.setText(msg);
+        tvOk.setText(okStr);
+        tvCancel.setText(cancleStr);
+        tvOk.setOnClickListener(v -> {
+            dismissAlert(context);
+            if (null != okClick) {
+                okClick.onClick(v);
+            }
+        });
+        tvCancel.setOnClickListener(v -> {
+            dismissAlert(context);
+            if (null != cancleClick) {
+                cancleClick.onClick(v);
+            }
+        });
+        dialog.show();
+        loadingTimer.start();
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
+
     /**
      * 【消息提示框，确认取消按钮】
      *

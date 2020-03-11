@@ -121,10 +121,15 @@ public class MainActivity extends AppCompatActivity {
         });
         btn_12 = findViewById(R.id.btn_12);
         btn_12.setOnClickListener(v -> {
-            DreamDialogFactory.showInputPass(MainActivity.this, "请输入密码", "19981999", "确认", "取消", new View.OnClickListener() {
+            DreamDialogFactory.showCustomMessage(this, 6000, "提示", "测试倒计时自动按确认", "确认", "取消", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Log.e("xj", "按了确认");
+                }
+            }, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("xj", "按了取消");
                 }
             });
         });
