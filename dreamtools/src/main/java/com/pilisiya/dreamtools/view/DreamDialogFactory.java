@@ -377,7 +377,8 @@ public class DreamDialogFactory {
             dismissAlert(context);
         });
         dialog.show();
-        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+        //dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
 
