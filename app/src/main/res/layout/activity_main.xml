@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/dream_white"
     tools:context="com.pilisiya.dream.MainActivity">
 
     <TextView
@@ -14,7 +14,7 @@
         android:gravity="center"
         android:textSize="20sp"
         android:text="通用设置|UI"
-        android:textColor="@color/white" />
+        android:textColor="@color/dream_white" />
 
     <LinearLayout
         android:layout_width="match_parent"

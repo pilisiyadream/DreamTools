@@ -12,7 +12,7 @@
         <item name="android:background">@drawable/btn_confirm_state</item>
         <item name="android:layout_margin">5dp</item>
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/dream_white</item>
         <item name="android:padding">5dp</item>
     </style>
 

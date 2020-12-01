@@ -3,13 +3,13 @@
     android:oneshot="false">
 
     <item
-        android:drawable="@drawable/bar_1"
+        android:drawable="@drawable/dream_bar_1"
         android:duration="300" />
     <item
-        android:drawable="@drawable/bar_2"
+        android:drawable="@drawable/dream_bar_2"
         android:duration="300" />
     <item
-        android:drawable="@drawable/bar_3"
+        android:drawable="@drawable/dream_bar_3"
         android:duration="300" />
 
 </animation-list>

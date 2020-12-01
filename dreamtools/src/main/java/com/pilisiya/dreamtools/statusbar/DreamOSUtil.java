@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
  * 包名：cn.landicorp.hunan.utils
  * 电话: 17752885689
  */
-public class OSUtils {
+public class DreamOSUtil {
     public static final String ROM_MIUI = "MIUI";
     public static final String ROM_EMUI = "EMUI";
     public static final String ROM_FLYME = "FLYME";

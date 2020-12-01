@@ -14,6 +14,7 @@ import com.pilisiya.dreamtools.util.DropDownUtil;
 import com.pilisiya.dreamtools.view.DreamDialogFactory;
 import com.pilisiya.dreamtools.view.popupwindow.DreamPopupWindowFactory;
 import com.pilisiya.dreamtools.view.popupwindow.onButtonClickListener;
+import com.pilisiya.dreamtools.view.yearmonnthday.DreamDialogWheelYearMonthDay;
 import com.smartpos.offlineinstall.OfflineInstallApi;
 import com.smartpos.offlineinstall.ServiceDeathException;
 import com.smartpos.offlineinstall.aidl.OSTask;
@@ -115,7 +116,11 @@ public class MainActivity extends AppCompatActivity {
         };
         btn_10 = findViewById(R.id.btn_10);
         btn_10.setOnClickListener(v -> {
-
+            DreamDialogWheelYearMonthDay time = new DreamDialogWheelYearMonthDay(this);
+            time.getSureView().setOnClickListener(view -> time.dismiss());
+            time.getCancleView().setOnClickListener(view -> time.dismiss());
+            time.setCanceledOnTouchOutside(false);
+            time.show();
         });
         btn_11 = findViewById(R.id.btn_11);
         btn_11.setOnClickListener(v -> {
@@ -131,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancel() {
-                    Log.e("xj", "onCancel" );
+                    Log.e("xj", "onCancel");
                 }
             });
         });

@@ -4,7 +4,7 @@ package com.pilisiya.dreamtools.util;
  * Created by xujiang on 2018/6/5.
  */
 
-public class StringUtil {
+public class DreamStringUtil {
     /**
      * 字符串转16进制字符串
      */

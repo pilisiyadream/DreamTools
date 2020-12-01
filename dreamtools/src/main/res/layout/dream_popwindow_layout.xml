@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/dream_white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -18,7 +18,7 @@
             android:gravity="center_vertical"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/balck_333333"
+            android:textColor="@color/dream_black_333333"
             android:text="取消" />
 
         <TextView

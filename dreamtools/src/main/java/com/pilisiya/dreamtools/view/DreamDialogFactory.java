@@ -2,13 +2,10 @@ package com.pilisiya.dreamtools.view;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pilisiya.dreamtools.R;
-import com.pilisiya.dreamtools.listener.IBackListener;
 import com.pilisiya.dreamtools.util.CustomWindowFlag;
 
 import java.util.HashMap;
@@ -62,9 +58,9 @@ public class DreamDialogFactory {
 
     private static Dialog createDialog(final Activity activity) {
         dismissAlert(activity);
-        Dialog dialog = new Dialog(activity, R.style.dialog_basic);
+        Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.setContentView(R.layout.dialog_show_tip);
+        dialog.setContentView(R.layout.dream_dialog_show_tip);
         dialog.setCancelable(false);
         dialogs.put(activity.toString(), dialog);
         tvTitle = dialog.findViewById(R.id.dialog_tip_title);
@@ -91,9 +87,9 @@ public class DreamDialogFactory {
 
     private static Dialog createDialog2(final Activity activity) {
         dismissAlert(activity);
-        Dialog dialog = new Dialog(activity, R.style.dialog_basic);
+        Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.setContentView(R.layout.dialog_input_value);
+        dialog.setContentView(R.layout.dream_dialog_input_value);
         dialog.setCancelable(false);
         dialogs.put(activity.toString(), dialog);
         tvTitle = dialog.findViewById(R.id.dialog_tip_title);

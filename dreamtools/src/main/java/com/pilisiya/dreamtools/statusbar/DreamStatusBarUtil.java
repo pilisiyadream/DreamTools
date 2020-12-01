@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
  * 包名：cn.landicorp.hunan.utils
  * 电话: 17752885689
  */
-public class StatusBarUtil {
+public class DreamStatusBarUtil {
     public final static int TYPE_MIUI = 0;
     public final static int TYPE_FLYME = 1;
     public final static int TYPE_M = 3;
@@ -43,15 +43,15 @@ public class StatusBarUtil {
      */
     public static  void setStatusBarUpColor(Activity activity) {
         //当FitsSystemWindows设置 true 时，会在屏幕最上方预留出状态栏高度的 padding
-        StatusBarUtil.setRootViewFitsSystemWindows(activity, true);
+        DreamStatusBarUtil.setRootViewFitsSystemWindows(activity, true);
         //设置状态栏透明
-        StatusBarUtil.setTranslucentStatus(activity);
+        DreamStatusBarUtil.setTranslucentStatus(activity);
         //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
         //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
-        if (!StatusBarUtil.setStatusBarDarkTheme(activity, true)) {
+        if (!DreamStatusBarUtil.setStatusBarDarkTheme(activity, true)) {
             //如果不支持设置深色风格 为了兼容总不能让状态栏白白的看不清, 于是设置一个状态栏颜色为半透明,
             //这样半透明+白=灰, 状态栏的文字能看得清
-            StatusBarUtil.setStatusBarColor(activity, 0x55000000);
+            DreamStatusBarUtil.setStatusBarColor(activity, 0x55000000);
         }
     }
 
@@ -67,7 +67,7 @@ public class StatusBarUtil {
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //使用SystemBarTintManager,需要先将状态栏设置为透明
             setTranslucentStatus(activity);
-            SystemBarTintManager systemBarTintManager = new SystemBarTintManager(activity);
+            DreamSystemBarTintManager systemBarTintManager = new DreamSystemBarTintManager(activity);
             //显示状态栏
             systemBarTintManager.setStatusBarTintEnabled(true);
             //设置状态栏颜色
@@ -128,9 +128,9 @@ public class StatusBarUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 setStatusBarFontIconDark(activity, TYPE_M, dark);
-            } else if (OSUtils.isMiui()) {
+            } else if (DreamOSUtil.isMiui()) {
                 setStatusBarFontIconDark(activity, TYPE_MIUI, dark);
-            } else if (OSUtils.isFlyme()) {
+            } else if (DreamOSUtil.isFlyme()) {
                 setStatusBarFontIconDark(activity, TYPE_FLYME, dark);
             } else {//其他情况
                 return false;

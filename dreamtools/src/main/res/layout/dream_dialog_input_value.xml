@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_dialog"
+    android:background="@drawable/dream_bg_dialog"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/dialog_tip_title"
-            style="@style/blue_0180c6_21_left"
+            style="@style/dream_blue_0180c6_21_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/dialog_tip_time"
-            style="@style/red_ff2600_21_right"
+            style="@style/dream_red_ff2600_21_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -34,11 +34,11 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="@color/blue_00b4f0" />
+        android:background="@color/dream_blue_00b4f0" />
 
     <EditText
         android:id="@+id/dialog_input_value"
-        style="@style/black_333333_18_center"
+        style="@style/dream_black_333333_18_center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -56,20 +56,20 @@
 
         <TextView
             android:id="@+id/dialog_tip_cancel_btn"
-            style="@style/white_22_center"
+            style="@style/dream_white_22_center"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:background="@drawable/cancel_btn_bg"
+            android:background="@drawable/dream_cancel_btn_bg"
             android:text="取消" />
 
         <TextView
             android:id="@+id/dialog_tip_confirm_btn"
-            style="@style/white_22_center"
+            style="@style/dream_white_22_center"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:background="@drawable/confirm_btn_bg"
+            android:background="@drawable/dream_confirm_btn_bg"
             android:text="确定" />
     </LinearLayout>
 
