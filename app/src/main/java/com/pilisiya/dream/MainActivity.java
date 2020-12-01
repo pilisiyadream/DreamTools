@@ -12,6 +12,8 @@ import android.widget.Button;
 import com.orhanobut.logger.Logger;
 import com.pilisiya.dreamtools.util.DropDownUtil;
 import com.pilisiya.dreamtools.view.DreamDialogFactory;
+import com.pilisiya.dreamtools.view.popupwindow.DreamPopupWindowFactory;
+import com.pilisiya.dreamtools.view.popupwindow.onButtonClickListener;
 import com.smartpos.offlineinstall.OfflineInstallApi;
 import com.smartpos.offlineinstall.ServiceDeathException;
 import com.smartpos.offlineinstall.aidl.OSTask;
@@ -117,7 +119,21 @@ public class MainActivity extends AppCompatActivity {
         });
         btn_11 = findViewById(R.id.btn_11);
         btn_11.setOnClickListener(v -> {
+            List<String> dadaList = new ArrayList<>();
+            dadaList.add("中国电信");
+            dadaList.add("中国联通");
+            dadaList.add("中国移动");
+            DreamPopupWindowFactory.showPopupWindow(this, dadaList, new onButtonClickListener() {
+                @Override
+                public void onComfirm(String selectItem) {
+                    Log.e("xj", "selectItem:" + selectItem);
+                }
 
+                @Override
+                public void onCancel() {
+                    Log.e("xj", "onCancel" );
+                }
+            });
         });
         btn_12 = findViewById(R.id.btn_12);
         btn_12.setOnClickListener(v -> {
