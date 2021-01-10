@@ -1,5 +1,6 @@
 package com.pilisiya.dream;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,8 +29,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final int TIME_OUT = 10011;
+    private static final int AGAIN = 10012;
+    private static final int QUERY = 10013;
     private Button btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9, btn_10, btn_11, btn_12;
     private Handler handler;
+    private int queryTime = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +41,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Logger.d("onCreate");
         handler = new Handler() {
+            @SuppressLint("HandlerLeak")
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == TIME_OUT) {
                     DreamDialogFactory.dismissAlert(MainActivity.this);
+                } else if (msg.what == AGAIN) {
+                    DreamDialogFactory.showWebLoading(MainActivity.this, "提示", "支付结果查询中,请稍后...", queryTime + "");
+                    handler.sendEmptyMessageDelayed(QUERY, 3000);
+                } else {
+                    queryTime--;
+                    if (queryTime == 0) {
+                        DreamDialogFactory.dismissAlert(MainActivity.this);
+                    } else {
+                        handler.sendEmptyMessage(AGAIN);
+                    }
                 }
                 super.handleMessage(msg);
             }
@@ -102,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
         btn_8 = findViewById(R.id.btn_8);
         btn_8.setOnClickListener(v -> {
             Logger.d("按钮8被点击了");
-            DreamDialogFactory.showWebLoading(MainActivity.this, "提示", "加载中,请稍后......");
-            handler.sendEmptyMessageDelayed(TIME_OUT, 40000);
+            //DreamDialogFactory.showWebLoading(MainActivity.this, "提示", "加载中,请稍后......");
+            handler.sendEmptyMessage(AGAIN);
         });
         btn_9 = findViewById(R.id.btn_9);
         btn_9.setOnClickListener(v -> DreamDialogFactory.dismissAlert(MainActivity.this));

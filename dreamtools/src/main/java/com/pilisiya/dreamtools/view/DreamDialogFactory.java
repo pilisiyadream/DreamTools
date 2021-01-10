@@ -206,7 +206,6 @@ public class DreamDialogFactory {
         dialog.show();
         //屏蔽HOME键
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
-        // dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
 
@@ -217,20 +216,34 @@ public class DreamDialogFactory {
      * @param msg     消息
      */
     public static void showWebLoading(final Activity context, String title, String msg, String count) {
-        clearBeforeDialog(context);
-        Dialog dialog = createDialog(context);
-        llBtn.setVisibility(View.GONE);
-        tvCount.setVisibility(View.VISIBLE);
-        tvTitle.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
-        line.setVisibility(View.GONE);
-        tvTitle.setText(title);
-        tvCount.setText(count);
-        tvMsg.setText(msg);
-        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
-        dialog.show();
+        Dialog dialog = dialogs.get(context.toString());
+        if (dialog != null && dialog.isShowing()) {
+            llBtn.setVisibility(View.GONE);
+            tvCount.setVisibility(View.VISIBLE);
+            tvTitle.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+            line.setVisibility(View.GONE);
+            tvTitle.setText(title);
+            tvCount.setText(count);
+            tvMsg.setText(msg);
+        } else {
+            clearBeforeDialog(context);
+            dialog = createDialog(context);
+            llBtn.setVisibility(View.GONE);
+            tvCount.setVisibility(View.VISIBLE);
+            tvTitle.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+            line.setVisibility(View.GONE);
+            tvTitle.setText(title);
+            tvCount.setText(count);
+            tvMsg.setText(msg);
+            dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+            dialog.show();
+        }
         //屏蔽HOME键
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
+
+
     }
 
 
