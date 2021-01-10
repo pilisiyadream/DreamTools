@@ -211,6 +211,30 @@ public class DreamDialogFactory {
 
 
     /**
+     * 【网络数据加载,添加倒计时时间】
+     *
+     * @param context Activity
+     * @param msg     消息
+     */
+    public static void showWebLoading(final Activity context, String title, String msg, String count) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog(context);
+        llBtn.setVisibility(View.GONE);
+        tvCount.setVisibility(View.VISIBLE);
+        tvTitle.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        line.setVisibility(View.GONE);
+        tvTitle.setText(title);
+        tvCount.setText(count);
+        tvMsg.setText(msg);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+        dialog.show();
+        //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
+
+
+    /**
      * 【消息确认提示框，只有一个确认按钮，且屏蔽HOME键和返回键】
      *
      * @param context Activity
@@ -239,7 +263,6 @@ public class DreamDialogFactory {
         dialog.show();
         //屏蔽HOME键盘
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
-        //dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
 
@@ -278,7 +301,6 @@ public class DreamDialogFactory {
         });
         dialog.show();
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
-        //dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
 
@@ -374,7 +396,6 @@ public class DreamDialogFactory {
         });
         dialog.show();
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
-        //dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
 

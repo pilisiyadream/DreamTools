@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DreamTools.iml" filepath="$PROJECT_DIR$/DreamTools.iml" group="DreamTools" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="DreamTools/app" />
-      <module fileurl="file://$PROJECT_DIR$/dreamtools/dreamtools.iml" filepath="$PROJECT_DIR$/dreamtools/dreamtools.iml" group="DreamTools/dreamtools" />
+      <module fileurl="file://$PROJECT_DIR$/DreamTools.iml" filepath="$PROJECT_DIR$/DreamTools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DreamTools.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DreamTools.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dreamtools/DreamTools.dreamtools.iml" filepath="$PROJECT_DIR$/.idea/modules/dreamtools/DreamTools.dreamtools.iml" />
     </modules>
   </component>
 </project>
