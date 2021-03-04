@@ -2,7 +2,9 @@ package com.pilisiya.dreamtools.view;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.os.Build;
 import android.os.CountDownTimer;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -38,7 +40,11 @@ public class DreamDialogFactory {
     private static EditText ed_pass;
     private static CountDownTimer loadingTimer = null;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static boolean dismissAlert(Activity activity) {
+        if (activity == null || activity.isDestroyed() || activity.isFinishing()) {
+            return false;
+        }
         if (null != loadingTimer) {
             loadingTimer.cancel();
             loadingTimer = null;
@@ -56,6 +62,7 @@ public class DreamDialogFactory {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private static Dialog createDialog(final Activity activity) {
         dismissAlert(activity);
         Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
@@ -85,6 +92,7 @@ public class DreamDialogFactory {
         return dialog;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private static Dialog createDialog2(final Activity activity) {
         dismissAlert(activity);
         Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
@@ -121,8 +129,8 @@ public class DreamDialogFactory {
      * @param okStr   确认按钮
      * @param okClick 确认按钮事件
      */
-    public static void showConfirmMessage(final Activity context, String title, String msg, String okStr,
-                                          final View.OnClickListener okClick) {
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void showConfirmMessage(final Activity context, String title, String msg, String okStr, final View.OnClickListener okClick) {
         clearBeforeDialog(context);
         Dialog dialog = createDialog(context);
         llBtn.setVisibility(View.VISIBLE);
@@ -150,6 +158,7 @@ public class DreamDialogFactory {
      * @param msg     消息
      * @param timeout 倒计时时间
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void showTipsMessage(final Activity context, String title, String msg, int timeout, boolean isShowComfirm) {
         clearBeforeDialog(context);
         Dialog dialog = createDialog(context);
@@ -192,7 +201,11 @@ public class DreamDialogFactory {
      * @param context Activity
      * @param msg     消息
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void showWebLoading(final Activity context, String title, String msg) {
+        if (context == null || context.isDestroyed() || context.isFinishing()) {
+            return;
+        }
         clearBeforeDialog(context);
         Dialog dialog = createDialog(context);
         llBtn.setVisibility(View.GONE);
@@ -206,6 +219,7 @@ public class DreamDialogFactory {
         dialog.show();
         //屏蔽HOME键
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
+
     }
 
 
@@ -215,6 +229,7 @@ public class DreamDialogFactory {
      * @param context Activity
      * @param msg     消息
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void showWebLoading(final Activity context, String title, String msg, String count) {
         Dialog dialog = dialogs.get(context.toString());
         if (dialog != null && dialog.isShowing()) {
@@ -256,6 +271,7 @@ public class DreamDialogFactory {
      * @param okStr   确认按钮
      * @param okClick 确认按钮事件
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void showMainComfirmMessage(final Activity context, String title, String msg, String okStr,
                                               final View.OnClickListener okClick) {
         clearBeforeDialog(context);
@@ -290,6 +306,7 @@ public class DreamDialogFactory {
      * @param okClick     确认按钮事件
      * @param cancleClick 取消按钮事件
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void showCustomMessage(final Activity context, String title, String msg, String okStr,
                                          String cancleStr, final View.OnClickListener okClick, final View.OnClickListener cancleClick) {
         clearBeforeDialog(context);
@@ -328,6 +345,7 @@ public class DreamDialogFactory {
      * @param okClick     确认按钮事件
      * @param cancleClick 取消按钮事件
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void showCustomMessage(final Activity context, int timeout, String title, String msg, String okStr,
                                          String cancleStr, final View.OnClickListener okClick, final View.OnClickListener cancleClick) {
         clearBeforeDialog(context);
@@ -380,6 +398,7 @@ public class DreamDialogFactory {
      * @param cancleStr 取消
      * @param sureClick 密码输入正确事件
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void showInputPass(final Activity context, String title, String pass, String okStr,
                                      String cancleStr, final View.OnClickListener sureClick) {
         clearBeforeDialog(context);

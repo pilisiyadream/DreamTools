@@ -1,6 +1,7 @@
 package com.pilisiya.dream;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.ColorTextView;
 import com.orhanobut.logger.Logger;
 import com.pilisiya.dreamtools.util.DropDownUtil;
 import com.pilisiya.dreamtools.view.DreamDialogFactory;
@@ -23,10 +25,11 @@ import com.smartpos.offlineinstall.aidl.OSTask;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * @author
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private static final int TIME_OUT = 10011;
     private static final int AGAIN = 10012;
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     DreamDialogFactory.dismissAlert(MainActivity.this);
                 } else if (msg.what == AGAIN) {
                     DreamDialogFactory.showWebLoading(MainActivity.this, "提示", "支付结果查询中,请稍后...", queryTime + "");
-                    handler.sendEmptyMessageDelayed(QUERY, 3000);
+                    handler.sendEmptyMessageDelayed(QUERY, 1000);
                 } else {
                     queryTime--;
                     if (queryTime == 0) {
@@ -117,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         btn_8 = findViewById(R.id.btn_8);
         btn_8.setOnClickListener(v -> {
             Logger.d("按钮8被点击了");
+            queryTime = 10;
             //DreamDialogFactory.showWebLoading(MainActivity.this, "提示", "加载中,请稍后......");
             handler.sendEmptyMessage(AGAIN);
         });
@@ -170,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
             });
         });
 
-
+        ((ColorTextView) findViewById(R.id.tv_color)).setText("我是一条鱼");
     }
 
 
