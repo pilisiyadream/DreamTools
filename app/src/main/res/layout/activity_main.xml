@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/dream_white"
+    android:orientation="vertical"
     tools:context="com.pilisiya.dream.MainActivity">
 
     <TextView
@@ -12,9 +13,9 @@
         android:layout_height="50dp"
         android:background="#2a2a2a"
         android:gravity="center"
-        android:textSize="20sp"
         android:text="通用设置|UI"
-        android:textColor="@color/dream_white" />
+        android:textColor="@color/dream_white"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -120,7 +121,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="xxxxxxxxxxxxx" />
+            android:text="底部弹框选择" />
 
         <Button
             android:id="@+id/btn_12"
@@ -128,12 +129,128 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="xxxxxxxxxxxxx" />
+            android:text="倒计时自动确认" />
 
-        <com.ColorTextView
-            android:id="@+id/tv_color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_13"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="PDF加载" />
+
+        <Button
+            android:id="@+id/btn_14"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="球加载" />
+
+        <Button
+            android:id="@+id/btn_15"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="三角形加载" />
+
+        <Button
+            android:id="@+id/btn_16"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="测试" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_17"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="屏蔽home键" />
+
+        <Button
+            android:id="@+id/btn_18"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="取消HOME键屏蔽" />
+
+        <Button
+            android:id="@+id/btn_19"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="普通屏蔽HOME键" />
+
+        <Button
+            android:id="@+id/btn_20"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="XXXXXXX" />
+
+
+    </LinearLayout>
+
+    <com.pilisiya.dreamtools.view.circle.CircleImageView
+        android:id="@+id/img_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/cat"
+        android:visibility="gone"
+        app:border_color="#FF7F24"
+        app:border_width="4dp"
+        app:is_circle="true" />
+
+    <!--    <com.pilisiya.dreamtools.view.circle.CircleMaskView-->
+    <!--        android:id="@+id/mask_view"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background="@drawable/cat"-->
+    <!--        app:mv_backgroundColor="#4977b5"-->
+    <!--        app:mv_height="350dp"-->
+    <!--        app:mv_width="350dp" />-->
+
+
+    <com.lidong.pdf.PDFView
+        android:id="@+id/pdf"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="gone" />
+
+    <com.ColorTextView
+        android:id="@+id/tv_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_shape_loading"
+        android:layout_width="400px"
+        android:layout_height="600px"
+        android:layout_marginTop="10dp" />
 
 </LinearLayout>

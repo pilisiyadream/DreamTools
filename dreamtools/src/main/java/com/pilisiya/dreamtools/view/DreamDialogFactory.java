@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.pilisiya.dreamtools.R;
 import com.pilisiya.dreamtools.util.CustomWindowFlag;
+import com.pilisiya.dreamtools.view.loading.ShapeLoadingDrawable;
+import com.pilisiya.dreamtools.view.loading.ThreeBallsLoadingDrawable;
 
 import java.util.HashMap;
 
@@ -28,6 +30,8 @@ import java.util.HashMap;
 
 public class DreamDialogFactory {
     private static HashMap<String, Dialog> dialogs = new HashMap<>();
+    private static HashMap<String, ThreeBallsLoadingDrawable> loadingDrawableHashMap = new HashMap<>();
+    private static HashMap<String, ShapeLoadingDrawable> shapeLoadingDrawableHashMap = new HashMap<>();
 
     private static TextView tvTitle;
     private static TextView tvCount;
@@ -38,7 +42,9 @@ public class DreamDialogFactory {
     private static ProgressBar progressBar;
     private static ImageView line;
     private static EditText ed_pass;
+    private static ImageView iv_shape_loading;
     private static CountDownTimer loadingTimer = null;
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static boolean dismissAlert(Activity activity) {
@@ -48,6 +54,15 @@ public class DreamDialogFactory {
         if (null != loadingTimer) {
             loadingTimer.cancel();
             loadingTimer = null;
+        }
+        ThreeBallsLoadingDrawable drawable = loadingDrawableHashMap.get(activity.toString());
+        if (drawable != null) {
+            drawable.stop();
+        }
+
+        ShapeLoadingDrawable drawable1 = shapeLoadingDrawableHashMap.get(activity.toString());
+        if (drawable1 != null) {
+            drawable1.stop();
         }
         Dialog dialog = dialogs.get(activity.toString());
         if ((dialog != null) && (dialog.isShowing())) {
@@ -120,6 +135,62 @@ public class DreamDialogFactory {
         return dialog;
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static Dialog createDialog3(final Activity activity) {
+        dismissAlert(activity);
+        Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setContentView(R.layout.dream_dialog_web_loading);
+        dialog.setCancelable(false);
+        dialogs.put(activity.toString(), dialog);
+        ThreeBallsLoadingDrawable drawable = new ThreeBallsLoadingDrawable();
+        loadingDrawableHashMap.put(activity.toString(), drawable);
+        tvTitle = dialog.findViewById(R.id.dialog_tip_title);
+        iv_shape_loading = dialog.findViewById(R.id.iv_shape_loading);
+        tvMsg = dialog.findViewById(R.id.dialog_tip_content);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog1.dismiss();
+                return false;
+            } else {
+                return false;
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static Dialog createDialog4(final Activity activity) {
+        dismissAlert(activity);
+        Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setContentView(R.layout.dream_dialog_web_loading2);
+        dialog.setCancelable(false);
+        dialogs.put(activity.toString(), dialog);
+        ShapeLoadingDrawable drawable = new ShapeLoadingDrawable();
+        shapeLoadingDrawableHashMap.put(activity.toString(), drawable);
+        tvTitle = dialog.findViewById(R.id.dialog_tip_title);
+        iv_shape_loading = dialog.findViewById(R.id.iv_shape_loading);
+        tvMsg = dialog.findViewById(R.id.dialog_tip_content);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog1.dismiss();
+                return false;
+            } else {
+                return false;
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
+    }
+
     /**
      * 【消息确认提示框，只有确认按钮，按返回键取消提示框】
      *
@@ -148,7 +219,6 @@ public class DreamDialogFactory {
         dialog.show();
         //屏蔽HOME键
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
-        //dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
     /**
@@ -191,7 +261,6 @@ public class DreamDialogFactory {
         loadingTimer.start();
         //屏蔽HOME键
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
-        // dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
     }
 
 
@@ -257,8 +326,57 @@ public class DreamDialogFactory {
         }
         //屏蔽HOME键
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
+
+    /**
+     * 【网络数据加载】
+     *
+     * @param context 上下文
+     * @param title   标题
+     * @param msg     消息
+     */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void showWebLoadingThreeBall(final Activity context, String title, String msg) {
+        if (context == null || context.isDestroyed() || context.isFinishing()) {
+            return;
+        }
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog3(context);
+        tvTitle.setVisibility(View.VISIBLE);
+        iv_shape_loading.setImageDrawable(loadingDrawableHashMap.get(context.toString()));
+        loadingDrawableHashMap.get(context.toString()).start();
+        tvTitle.setText(title);
+        tvMsg.setText(msg);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+        dialog.show();
+        //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
 
 
+    /**
+     * 【网络数据加载】
+     *
+     * @param context 上下文
+     * @param title   标题
+     * @param msg     消息
+     */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void showWebLoadingShape(final Activity context, String title, String msg) {
+        if (context == null || context.isDestroyed() || context.isFinishing()) {
+            return;
+        }
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog4(context);
+        tvTitle.setVisibility(View.VISIBLE);
+        iv_shape_loading.setImageDrawable(shapeLoadingDrawableHashMap.get(context.toString()));
+        shapeLoadingDrawableHashMap.get(context.toString()).start();
+        tvTitle.setText(title);
+        tvMsg.setText(msg);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+        dialog.show();
+        //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
     }
 
 
@@ -272,8 +390,7 @@ public class DreamDialogFactory {
      * @param okClick 确认按钮事件
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static void showMainComfirmMessage(final Activity context, String title, String msg, String okStr,
-                                              final View.OnClickListener okClick) {
+    public static void showMainComfirmMessage(final Activity context, String title, String msg, String okStr, final View.OnClickListener okClick) {
         clearBeforeDialog(context);
         Dialog dialog = createDialog(context);
         llBtn.setVisibility(View.VISIBLE);
@@ -307,8 +424,7 @@ public class DreamDialogFactory {
      * @param cancleClick 取消按钮事件
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static void showCustomMessage(final Activity context, String title, String msg, String okStr,
-                                         String cancleStr, final View.OnClickListener okClick, final View.OnClickListener cancleClick) {
+    public static void showCustomMessage(final Activity context, String title, String msg, String okStr, String cancleStr, final View.OnClickListener okClick, final View.OnClickListener cancleClick) {
         clearBeforeDialog(context);
         Dialog dialog = createDialog(context);
         llBtn.setVisibility(View.VISIBLE);
@@ -346,8 +462,7 @@ public class DreamDialogFactory {
      * @param cancleClick 取消按钮事件
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static void showCustomMessage(final Activity context, int timeout, String title, String msg, String okStr,
-                                         String cancleStr, final View.OnClickListener okClick, final View.OnClickListener cancleClick) {
+    public static void showCustomMessage(final Activity context, int timeout, String title, String msg, String okStr, String cancleStr, final View.OnClickListener okClick, final View.OnClickListener cancleClick) {
         clearBeforeDialog(context);
         Dialog dialog = createDialog(context);
         tvCount.setVisibility(View.VISIBLE);
@@ -399,8 +514,7 @@ public class DreamDialogFactory {
      * @param sureClick 密码输入正确事件
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static void showInputPass(final Activity context, String title, String pass, String okStr,
-                                     String cancleStr, final View.OnClickListener sureClick) {
+    public static void showInputPass(final Activity context, String title, String pass, String okStr, String cancleStr, final View.OnClickListener sureClick) {
         clearBeforeDialog(context);
         Dialog dialog = createDialog2(context);
         llBtn.setVisibility(View.VISIBLE);
