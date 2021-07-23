@@ -25,6 +25,7 @@ import com.lidong.pdf.listener.OnDrawListener;
 import com.lidong.pdf.listener.OnLoadCompleteListener;
 import com.lidong.pdf.listener.OnPageChangeListener;
 import com.orhanobut.logger.Logger;
+import com.pilisiya.dreamtools.listener.DreamIBackListener;
 import com.pilisiya.dreamtools.util.DreamLogUtil;
 import com.pilisiya.dreamtools.util.DropDownUtil;
 import com.pilisiya.dreamtools.view.DreamDialogFactory;
@@ -83,7 +84,7 @@ public class MainActivity extends Activity {
 
         btn_1 = findViewById(R.id.btn_1);
         btn_1.setOnClickListener(v -> {
-            DreamDialogFactory.showTipsMessage(MainActivity.this, "提示", "测试提示消息长度，测试提示消息长度，测试提示消息长度", 10000, false);
+            DreamDialogFactory.showTipsMessage(MainActivity.this, "提示", "测试提示消息长度，测试提示消息长度，测试提示消息长度", 1000, false);
         });
         btn_2 = findViewById(R.id.btn_2);
         btn_2.setOnClickListener(v -> DreamDialogFactory.showConfirmMessage(MainActivity.this, "提示", "只含有确认键盘的弹窗", "确认", v1 -> {
@@ -266,7 +267,12 @@ public class MainActivity extends Activity {
 
         btn_16 = findViewById(R.id.btn_16);
         btn_16.setOnClickListener(view -> {
+            DreamDialogFactory.showToast(this, "身份验证成功", 2000, new DreamIBackListener() {
+                @Override
+                public void onBack() {
 
+                }
+            });
         });
 
 
@@ -294,7 +300,7 @@ public class MainActivity extends Activity {
 
         btn_20 = findViewById(R.id.btn_20);
         btn_20.setOnClickListener(view -> {
-
+            startActivity(new Intent(this, SecondActivity.class));
         });
 
 
