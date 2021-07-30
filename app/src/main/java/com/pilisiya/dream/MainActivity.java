@@ -267,7 +267,7 @@ public class MainActivity extends Activity {
 
         btn_16 = findViewById(R.id.btn_16);
         btn_16.setOnClickListener(view -> {
-            DreamDialogFactory.showToast(this, "身份验证成功", 2000, new DreamIBackListener() {
+            DreamDialogFactory.showToast(this, false, "身份验证失败", 3000, new DreamIBackListener() {
                 @Override
                 public void onBack() {
 

@@ -43,7 +43,7 @@ public class DreamDialogFactory {
     private static ProgressBar progressBar;
     private static ImageView line;
     private static EditText ed_pass;
-    private static ImageView iv_shape_loading;
+    private static ImageView iv_shape_loading, img_ok, img_error;
     private static CountDownTimer loadingTimer = null;
 
 
@@ -201,6 +201,8 @@ public class DreamDialogFactory {
         dialog.setCancelable(false);
         dialogs.put(activity.toString(), dialog);
         tvMsg = dialog.findViewById(R.id.dialog_tip_content);
+        img_ok = dialog.findViewById(R.id.img_ok);
+        img_error = dialog.findViewById(R.id.img_error);
         dialog.setOnKeyListener((dialog1, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_SEARCH) {
                 return true;
@@ -578,7 +580,7 @@ public class DreamDialogFactory {
      * @param timeout 倒计时时间
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static void showToast(final Activity context, String msg, int timeout, DreamIBackListener listener) {
+    public static void showToast(final Activity context, boolean success, String msg, int timeout, DreamIBackListener listener) {
         clearBeforeDialog(context);
         Dialog dialog = createDialog5(context);
         loadingTimer = new CountDownTimer(timeout, 1000) {
@@ -593,6 +595,13 @@ public class DreamDialogFactory {
             }
         };
         tvMsg.setText(msg);
+        if (success) {
+            img_ok.setVisibility(View.VISIBLE);
+            img_error.setVisibility(View.GONE);
+        } else {
+            img_ok.setVisibility(View.GONE);
+            img_error.setVisibility(View.VISIBLE);
+        }
         dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
         dialog.show();
         loadingTimer.start();
