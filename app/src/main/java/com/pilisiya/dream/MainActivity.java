@@ -25,6 +25,7 @@ import com.lidong.pdf.listener.OnDrawListener;
 import com.lidong.pdf.listener.OnLoadCompleteListener;
 import com.lidong.pdf.listener.OnPageChangeListener;
 import com.orhanobut.logger.Logger;
+import com.pilisiya.dreamtools.listener.DreamChoosePayTypeListener;
 import com.pilisiya.dreamtools.listener.DreamIBackListener;
 import com.pilisiya.dreamtools.util.DreamLogUtil;
 import com.pilisiya.dreamtools.util.DropDownUtil;
@@ -267,10 +268,10 @@ public class MainActivity extends Activity {
 
         btn_16 = findViewById(R.id.btn_16);
         btn_16.setOnClickListener(view -> {
-            DreamDialogFactory.showToast(this, false, "身份验证失败", 3000, new DreamIBackListener() {
+            DreamDialogFactory.choosePayType(this, "22.99", new DreamChoosePayTypeListener() {
                 @Override
-                public void onBack() {
-
+                public void onChoice(int payType) {
+                    Log.e("ssss", "ssss" + payType);
                 }
             });
         });
