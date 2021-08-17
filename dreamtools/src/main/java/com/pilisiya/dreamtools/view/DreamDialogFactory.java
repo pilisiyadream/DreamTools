@@ -45,7 +45,7 @@ public class DreamDialogFactory {
     private static ProgressBar progressBar;
     private static ImageView line, img_cancel;
     private static EditText ed_pass;
-    private static TextView tv_bank, tv_scan, tv_amt;
+    private static TextView tv_bank, tv_scan, tv_amt,tv_face;
     private static ImageView iv_shape_loading, img_ok, img_error;
     private static CountDownTimer loadingTimer = null;
 
@@ -230,6 +230,32 @@ public class DreamDialogFactory {
         dialogs.put(activity.toString(), dialog);
         img_cancel = dialog.findViewById(R.id.img_cancel);
         tv_bank = dialog.findViewById(R.id.tv_bank);
+        tv_scan = dialog.findViewById(R.id.tv_scan);
+        tv_amt = dialog.findViewById(R.id.tv_amt);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog1.dismiss();
+                return false;
+            } else {
+                return false;
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static Dialog createDialog7(final Activity activity) {
+        dismissAlert(activity);
+        Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setContentView(R.layout.dream_dialog_chose_face);
+        dialog.setCancelable(false);
+        dialogs.put(activity.toString(), dialog);
+        img_cancel = dialog.findViewById(R.id.img_cancel);
+        tv_face = dialog.findViewById(R.id.tv_face);
         tv_scan = dialog.findViewById(R.id.tv_scan);
         tv_amt = dialog.findViewById(R.id.tv_amt);
         dialog.setOnKeyListener((dialog1, keyCode, event) -> {
@@ -665,6 +691,31 @@ public class DreamDialogFactory {
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void choosePayType2(final Activity context, String amt, DreamChoosePayTypeListener listener) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog7(context);
+        if (!TextUtils.isEmpty(amt))
+            tv_amt.setText(amt);
+        if (listener != null) {
+            img_cancel.setOnClickListener(view -> {
+                dismissAlert(context);
+                listener.onChoice(DreamConstant.PAY_TYPE_CANCEL);
+            });
+            tv_face.setOnClickListener(view -> {
+                dismissAlert(context);
+                listener.onChoice(DreamConstant.PAY_TYPE_FACE);
+            });
+            tv_scan.setOnClickListener(view -> {
+                dismissAlert(context);
+                listener.onChoice(DreamConstant.PAY_TYPE_SCAN);
+            });
+        }
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+        dialog.show();
+        //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
 
     /**
      * @param activity
