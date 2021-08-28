@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:drawableLeft="@drawable/dream_scan"
+            android:drawableLeft="@drawable/dream_scan_2"
             android:text="扫码支付" />
     </LinearLayout>
 

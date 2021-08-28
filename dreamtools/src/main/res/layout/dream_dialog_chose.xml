@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:background="@drawable/dream_bg_choice"
     android:orientation="vertical">
@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:orientation="horizontal">
 
         <TextView
@@ -19,8 +19,9 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:text="支付金额："
+            android:textStyle="bold"
             android:textColor="@color/dream_black_333333"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_t"
@@ -30,8 +31,9 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="2dp"
             android:text="￥"
+            android:textStyle="bold"
             android:textColor="@color/dream_red_ff2600"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_amt"
@@ -40,8 +42,9 @@
             android:layout_toRightOf="@+id/tv_t"
             android:layout_centerVertical="true"
             android:layout_marginStart="2dp"
+            android:textStyle="bold"
             android:textColor="@color/dream_red_ff2600"
-            android:textSize="18sp" />
+            android:textSize="22sp" />
 
 
         <ImageView
@@ -70,8 +73,10 @@
             android:id="@+id/tv_bank"
             style="@style/dream_black_333333_18_center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_margin="10dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
             android:drawableLeft="@drawable/dream_bank"
             android:text="银行卡" />
 
@@ -84,8 +89,10 @@
             android:id="@+id/tv_scan"
             style="@style/dream_black_333333_18_center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textSize="25sp"
             android:drawableLeft="@drawable/dream_scan"
             android:text="扫一扫" />
     </LinearLayout>

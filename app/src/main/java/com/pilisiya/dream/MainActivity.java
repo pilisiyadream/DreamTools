@@ -2,41 +2,25 @@ package com.pilisiya.dream;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
-import android.provider.Settings;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.ColorTextView;
-import com.lidong.pdf.PDFView;
-import com.lidong.pdf.listener.OnDrawListener;
-import com.lidong.pdf.listener.OnLoadCompleteListener;
-import com.lidong.pdf.listener.OnPageChangeListener;
 import com.orhanobut.logger.Logger;
-import com.pilisiya.dreamtools.listener.DreamChoosePayTypeListener;
-import com.pilisiya.dreamtools.listener.DreamIBackListener;
-import com.pilisiya.dreamtools.util.DreamLogUtil;
 import com.pilisiya.dreamtools.util.DropDownUtil;
 import com.pilisiya.dreamtools.view.DreamDialogFactory;
-import com.pilisiya.dreamtools.view.loading.DouYinLoadingDrawable;
 import com.pilisiya.dreamtools.view.loading.ShapeLoadingDrawable;
-import com.pilisiya.dreamtools.view.loading.ThreeBallsLoadingDrawable;
 import com.pilisiya.dreamtools.view.popupwindow.DreamPopupWindowFactory;
 import com.pilisiya.dreamtools.view.popupwindow.onButtonClickListener;
 import com.pilisiya.dreamtools.view.yearmonnthday.DreamDialogWheelDateTime;
-import com.pilisiya.dreamtools.view.yearmonnthday.DreamDialogWheelYearMonthDay;
 import com.smartpos.offlineinstall.OfflineInstallApi;
 import com.smartpos.offlineinstall.ServiceDeathException;
 import com.smartpos.offlineinstall.aidl.OSTask;
@@ -55,7 +39,6 @@ public class MainActivity extends Activity {
     private Button btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9, btn_10, btn_11, btn_12, btn_13, btn_14, btn_15, btn_16, btn_17, btn_18, btn_19, btn_20;
     private Handler handler;
     private int queryTime = 10;
-    private PDFView pdfView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,43 +186,10 @@ public class MainActivity extends Activity {
         });
 
         ((ColorTextView) findViewById(R.id.tv_color)).setText("我是一条鱼");
-        pdfView = findViewById(R.id.pdf);
         btn_13 = findViewById(R.id.btn_13);
         btn_13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                pdfView.fileFromLocalStorage(new OnPageChangeListener() {
-//                    @Override
-//                    public void onPageChanged(int page, int pageCount) {
-//
-//                    }
-//                }, new OnLoadCompleteListener() {
-//                    @Override
-//                    public void loadComplete(int nbPages) {
-//
-//                    }
-//                }, new OnDrawListener() {
-//                    @Override
-//                    public void onLayerDrawn(Canvas canvas, float pageWidth, float pageHeight, int displayedPage) {
-//
-//                    }
-//                }, "http://file.chmsp.com.cn/colligate/file/00100000224821.pdf", "00100000224821.pdf");
-                pdfView.fileFromLocalStorage(new OnPageChangeListener() {
-                    @Override
-                    public void onPageChanged(int page, int pageCount) {
-
-                    }
-                }, new OnLoadCompleteListener() {
-                    @Override
-                    public void loadComplete(int nbPages) {
-
-                    }
-                }, new OnDrawListener() {
-                    @Override
-                    public void onLayerDrawn(Canvas canvas, float pageWidth, float pageHeight, int displayedPage) {
-
-                    }
-                }, "https://fdfstest.dahanjsy.com/group1/M00/00/0D/oYYBAGB-hC6ATbhdAAB_N_lQbM8475.pdf", "oYYBAGB-hC6ATbhdAAB_N_lQbM8475.pdf");
             }
         });
 
