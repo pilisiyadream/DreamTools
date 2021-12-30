@@ -45,8 +45,8 @@ public class PickerView extends View {
     private Paint mPaint;
     private Paint linePaint;
 
-    private float mMaxTextSize = 80;
-    private float mMinTextSize = 40;
+    private float mMaxTextSize = 30;
+    private float mMinTextSize = 14;
 
     private float mMaxTextAlpha = 255;
     private float mMinTextAlpha = 120;
@@ -193,8 +193,14 @@ public class PickerView extends View {
     private void drawData(Canvas canvas) {
         // 先绘制选中的text再往上往下绘制其余的text
         float scale = parabola(mViewHeight / 4.0f, mMoveLen);
+
         float size = (mMaxTextSize - mMinTextSize) * scale + mMinTextSize;
-        mPaint.setTextSize(size);
+        if (mDataList.get(mCurrentSelected).length() > 10) {
+            mPaint.setTextSize((mMaxTextSize - mMinTextSize) * 1.2f);
+        } else {
+            mPaint.setTextSize(size);
+        }
+
         mPaint.setAlpha((int) ((mMaxTextAlpha - mMinTextAlpha) * scale + mMinTextAlpha));
         // text居中绘制，注意baseline的计算才能达到居中，y值是text中心坐标
         float x = (float) (mViewWidth / 2.0);
@@ -202,7 +208,12 @@ public class PickerView extends View {
         FontMetricsInt fmi = mPaint.getFontMetricsInt();
         float baseline = (float) (y - (fmi.bottom / 2.0 + fmi.top / 2.0));
 
-        canvas.drawText(mDataList.get(mCurrentSelected), x, baseline, mPaint);
+        if (mDataList.get(mCurrentSelected).length() > 18) {
+            canvas.drawText(mDataList.get(mCurrentSelected).substring(0, 18), x, baseline - 20, mPaint);
+            canvas.drawText(mDataList.get(mCurrentSelected).substring(18), x, baseline + 20, mPaint);
+        } else {
+            canvas.drawText(mDataList.get(mCurrentSelected), x, baseline, mPaint);
+        }
 
         // 绘制上方data
         for (int i = 1; (mCurrentSelected - i) >= 0; i++) {

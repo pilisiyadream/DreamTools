@@ -41,5 +41,10 @@
       <option name="name" value="H:\Android\Sdk\extras\android\m2repository" />
       <option name="url" value="file:/H:/Android/Sdk/extras/android/m2repository" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="H:\Android\Sdk\extras\android\m2repository" />
+      <option name="name" value="H:\Android\Sdk\extras\android\m2repository" />
+      <option name="url" value="file:/H:/Android/Sdk/extras/android/m2repository/" />
+    </remote-repository>
   </component>
 </project>

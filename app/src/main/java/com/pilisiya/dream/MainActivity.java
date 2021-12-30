@@ -156,8 +156,9 @@ public class MainActivity extends Activity {
         btn_11.setOnClickListener(v -> {
             List<String> dadaList = new ArrayList<>();
             dadaList.add("中国电信");
-            dadaList.add("中国联通");
+            dadaList.add("我是一只酸菜鱼，我可以唱歌跳舞,我是一只酸菜鱼");
             dadaList.add("中国移动");
+            dadaList.add("测试测试");
             DreamPopupWindowFactory.showPopupWindow(this, dadaList, new onButtonClickListener() {
                 @Override
                 public void onComfirm(String selectItem) {
