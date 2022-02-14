@@ -219,7 +219,7 @@ public class MainActivity extends Activity {
 
         btn_16 = findViewById(R.id.btn_16);
         btn_16.setOnClickListener(view -> {
-            DreamDialogFactory.choosePayType2(this, "22.99", payType -> Log.e("ssss", "ssss" + payType));
+            DreamDialogFactory.choosePayType(this, "22.99", payType -> Log.e("ssss", "ssss" + payType));
         });
 
 
