@@ -30,6 +30,11 @@
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="dream_black_333333_16_center">
+        <item name="android:textColor">@color/dream_black_333333</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
 
     <style name="dream_white_22_center">
         <item name="android:textColor">@color/dream_white</item>

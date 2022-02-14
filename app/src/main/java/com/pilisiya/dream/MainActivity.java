@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
         btn_3.setOnClickListener(v -> DreamDialogFactory.showMainComfirmMessage(MainActivity.this, "提示", "只含有确认键盘的弹窗，屏蔽HOME鍵和返回鍵", "确认", v12 -> {
         }));
         btn_4 = findViewById(R.id.btn_4);
-        btn_4.setOnClickListener(v -> DreamDialogFactory.showCustomMessage(MainActivity.this, "提示", "普通弹窗", "确认", "取消", v13 -> {
+        btn_4.setOnClickListener(v -> DreamDialogFactory.showCustomMessage(MainActivity.this, "提示", "进行扫码预授权完成撤销，操作后资金将全额退款且不可找回，请谨慎操作。如需重新收款请联系消费者。", "确认", "取消", v13 -> {
         }, v14 -> {
         }));
         btn_5 = findViewById(R.id.btn_5);

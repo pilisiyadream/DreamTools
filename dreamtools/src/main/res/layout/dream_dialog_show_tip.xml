@@ -14,8 +14,7 @@
             style="@style/dream_blue_0180c6_21_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="20dp"
             android:text="标题" />
 
@@ -50,8 +49,8 @@
 
     <TextView
         android:id="@+id/dialog_tip_content"
-        style="@style/dream_black_333333_18_center"
-        android:layout_width="fill_parent"
+        style="@style/dream_black_333333_16_center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:minLines="3"
