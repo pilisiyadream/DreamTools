@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.pilisiya.dreamtools.R;
 import com.pilisiya.dreamtools.listener.DreamChoosePayTypeListener;
 import com.pilisiya.dreamtools.listener.DreamIBackListener;
+import com.pilisiya.dreamtools.listener.DreamIOkListener;
 import com.pilisiya.dreamtools.util.CustomWindowFlag;
 import com.pilisiya.dreamtools.util.DreamConstant;
 import com.pilisiya.dreamtools.view.loading.ShapeLoadingDrawable;
@@ -45,7 +46,7 @@ public class DreamDialogFactory {
     private static ProgressBar progressBar;
     private static ImageView line, img_cancel;
     private static EditText ed_pass;
-    private static TextView tv_bank, tv_scan, tv_amt,tv_face;
+    private static TextView tv_bank, tv_scan, tv_amt, tv_face;
     private static ImageView iv_shape_loading, img_ok, img_error;
     private static CountDownTimer loadingTimer = null;
 
@@ -626,6 +627,36 @@ public class DreamDialogFactory {
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void showInputValue(final Activity context, String title, int length, final DreamIOkListener valueClick, final View.OnClickListener cancleClick) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog2(context);
+        llBtn.setVisibility(View.VISIBLE);
+        tvTitle.setText(title);
+        tvOk.setText("确认");
+        tvCancel.setText("取消");
+        tvOk.setOnClickListener(v -> {
+            if (null != valueClick) {
+                if (TextUtils.isEmpty(ed_pass.getText().toString())) {
+                    Toast.makeText(context, "请输入" + title, Toast.LENGTH_LONG).show();
+                } else if (ed_pass.getText().toString().length() != length) {
+                    Toast.makeText(context, "输入长度不对", Toast.LENGTH_LONG).show();
+                } else {
+                    dismissAlert(context);
+                    valueClick.onInputValue(ed_pass.getText().toString());
+                }
+            }
+        });
+        tvCancel.setOnClickListener(v -> {
+            if(cancleClick!=null){
+                dismissAlert(context);
+                cancleClick.onClick(v);
+            }
+        });
+        dialog.show();
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
 
     /**
      * 【倒计时提示框】
