@@ -42,6 +42,7 @@ public class DreamDialogFactory {
     private static LinearLayout llBtn;
     private static TextView tvMsg;
     private static TextView tvOk;
+    private static TextView tvTopCancel;
     private static TextView tvCancel;
     private static ProgressBar progressBar;
     private static ImageView line, img_cancel;
@@ -91,6 +92,7 @@ public class DreamDialogFactory {
         dialog.setCancelable(false);
         dialogs.put(activity.toString(), dialog);
         tvTitle = dialog.findViewById(R.id.dialog_tip_title);
+        tvTopCancel = dialog.findViewById(R.id.dialog_top_back);
         tvCount = dialog.findViewById(R.id.dialog_tip_time);
         llBtn = dialog.findViewById(R.id.dialog_btn_ll);
         tvMsg = dialog.findViewById(R.id.dialog_tip_content);
@@ -379,6 +381,44 @@ public class DreamDialogFactory {
         tvOk.setVisibility(View.VISIBLE);
         tvOk.setText(cancelMsg);
         tvOk.setOnClickListener(v -> {
+            loadingTimer.cancel();
+            dismissAlert(context);
+            if (cancelClick != null) {
+                cancelClick.onClick(v);
+            }
+        });
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+        dialog.show();
+        loadingTimer.start();
+        //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
+
+
+    public static void showTipsMessage(final Activity context, String title, String msg, int timeout, final View.OnClickListener cancelClick) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog(context);
+        loadingTimer = new CountDownTimer(timeout, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tvCount.setText((millisUntilFinished / 1000) + "");
+            }
+
+            @Override
+            public void onFinish() {
+                dismissAlert(context);
+            }
+        };
+        llBtn.setVisibility(View.VISIBLE);
+        tvCount.setVisibility(View.VISIBLE);
+        tvCount.setText((timeout / 1000) + "");
+        tvTitle.setVisibility(View.VISIBLE);
+        tvTitle.setText(title);
+        tvMsg.setText(msg);
+        tvCancel.setVisibility(View.GONE);
+        tvOk.setVisibility(View.GONE);
+        tvTopCancel.setVisibility(View.VISIBLE);
+        tvTopCancel.setOnClickListener(v -> {
             loadingTimer.cancel();
             dismissAlert(context);
             if (cancelClick != null) {

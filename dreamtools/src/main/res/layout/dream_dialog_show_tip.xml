@@ -10,6 +10,17 @@
         android:layout_height="55dp">
 
         <TextView
+            android:id="@+id/dialog_top_back"
+            style="@style/dream_red_ff2600_21_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="取消"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/dialog_tip_title"
             style="@style/dream_blue_0180c6_21_left"
             android:layout_width="wrap_content"

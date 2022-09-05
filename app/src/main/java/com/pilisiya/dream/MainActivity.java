@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
 
         btn_1 = findViewById(R.id.btn_1);
         btn_1.setOnClickListener(v -> {
-            DreamDialogFactory.showTipsMessage(MainActivity.this, "提示", "测试提示消息长度，测试提示消息长度，测试提示消息长度", 10 * 1000, "取消读卡", new View.OnClickListener() {
+            DreamDialogFactory.showTipsMessage(MainActivity.this, "提示", "测试提示消息长度，测试提示消息长度，测试提示消息长度", 10 * 1000, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     DreamLogUtil.e("点击了取消");
