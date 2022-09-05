@@ -409,7 +409,7 @@ public class DreamDialogFactory {
                 dismissAlert(context);
             }
         };
-        llBtn.setVisibility(View.VISIBLE);
+        llBtn.setVisibility(View.GONE);
         tvCount.setVisibility(View.VISIBLE);
         tvCount.setText((timeout / 1000) + "");
         tvTitle.setVisibility(View.VISIBLE);
