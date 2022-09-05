@@ -70,7 +70,12 @@ public class MainActivity extends Activity {
 
         btn_1 = findViewById(R.id.btn_1);
         btn_1.setOnClickListener(v -> {
-            DreamDialogFactory.showTipsMessage(MainActivity.this, "提示", "测试提示消息长度，测试提示消息长度，测试提示消息长度", 1000, false);
+            DreamDialogFactory.showTipsMessage(MainActivity.this, "提示", "测试提示消息长度，测试提示消息长度，测试提示消息长度", 10 * 1000, "取消读卡", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DreamLogUtil.e("点击了取消");
+                }
+            });
         });
         btn_2 = findViewById(R.id.btn_2);
         btn_2.setOnClickListener(v -> DreamDialogFactory.showConfirmMessage(MainActivity.this, "提示", "只含有确认键盘的弹窗", "确认", v1 -> {

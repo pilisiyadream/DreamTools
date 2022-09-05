@@ -348,6 +348,52 @@ public class DreamDialogFactory {
 
 
     /**
+     * 【倒计时提示框】
+     *
+     * @param context Activity
+     * @param msg     消息
+     * @param timeout 倒计时时间
+     */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void showTipsMessage(final Activity context, String title, String msg, int timeout, String cancelMsg, final View.OnClickListener cancelClick) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog(context);
+        loadingTimer = new CountDownTimer(timeout, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tvCount.setText((millisUntilFinished / 1000) + "");
+            }
+
+            @Override
+            public void onFinish() {
+                dismissAlert(context);
+            }
+        };
+        llBtn.setVisibility(View.VISIBLE);
+        tvCount.setVisibility(View.VISIBLE);
+        tvCount.setText((timeout / 1000) + "");
+        tvTitle.setVisibility(View.VISIBLE);
+        tvTitle.setText(title);
+        tvMsg.setText(msg);
+        tvCancel.setVisibility(View.GONE);
+        tvOk.setVisibility(View.VISIBLE);
+        tvOk.setText(cancelMsg);
+        tvOk.setOnClickListener(v -> {
+            loadingTimer.cancel();
+            dismissAlert(context);
+            if (cancelClick != null) {
+                cancelClick.onClick(v);
+            }
+        });
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+        dialog.show();
+        loadingTimer.start();
+        //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
+
+
+    /**
      * 【网络数据加载】
      *
      * @param context Activity
@@ -649,7 +695,7 @@ public class DreamDialogFactory {
             }
         });
         tvCancel.setOnClickListener(v -> {
-            if(cancleClick!=null){
+            if (cancleClick != null) {
                 dismissAlert(context);
                 cancleClick.onClick(v);
             }
