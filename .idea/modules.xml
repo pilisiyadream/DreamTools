@@ -4,7 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DreamTools.iml" filepath="$PROJECT_DIR$/DreamTools.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DreamTools.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DreamTools.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DreamTools.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DreamTools.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DreamTools.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DreamTools.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DreamTools.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DreamTools.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/dreamtools/DreamTools.dreamtools.iml" filepath="$PROJECT_DIR$/.idea/modules/dreamtools/DreamTools.dreamtools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dreamtools/DreamTools.dreamtools.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/dreamtools/DreamTools.dreamtools.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dreamtools/DreamTools.dreamtools.main.iml" filepath="$PROJECT_DIR$/.idea/modules/dreamtools/DreamTools.dreamtools.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dreamtools/DreamTools.dreamtools.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/dreamtools/DreamTools.dreamtools.unitTest.iml" />
     </modules>
   </component>
 </project>

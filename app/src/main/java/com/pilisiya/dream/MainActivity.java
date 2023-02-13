@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.ColorTextView;
 import com.orhanobut.logger.Logger;
+import com.pilisiya.dreamtools.listener.DreamIBackListener;
 import com.pilisiya.dreamtools.listener.DreamIOkListener;
 import com.pilisiya.dreamtools.util.DreamLogUtil;
 import com.pilisiya.dreamtools.util.DropDownUtil;
@@ -254,15 +255,10 @@ public class MainActivity extends Activity {
 
         btn_20 = findViewById(R.id.btn_20);
         btn_20.setOnClickListener(view -> {
-            DreamDialogFactory.showInputValue(this, "请输入身份证后六位", 6, new DreamIOkListener() {
+            DreamDialogFactory.showTimeOut(this, "提示", "支付结果未知，稍后将发起查询", 10 * 1000, new DreamIBackListener() {
                 @Override
-                public void onInputValue(String value) {
-                    DreamLogUtil.e("value:" + value);
-                }
-            }, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    DreamLogUtil.e("用户取消");
+                public void onBack() {
+
                 }
             });
         });

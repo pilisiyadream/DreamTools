@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dream_bg_dialog"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="55dp">
+
+        <TextView
+            android:id="@+id/dialog_top_back"
+            style="@style/dream_red_ff2600_21_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="取消"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/dialog_tip_title"
+            style="@style/dream_blue_0180c6_21_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="20dp"
+            android:text="标题" />
+
+        <TextView
+            android:id="@+id/dialog_tip_time"
+            style="@style/dream_red_ff2600_21_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text="60"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/dream_blue_00b4f0" />
+
+    <ProgressBar
+        android:id="@+id/bar_progress"
+        style="@style/dream_progress_wait"
+        android:layout_width="match_parent"
+        android:layout_height="10dip"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:visibility="gone"
+        android:background="#ffffff" />
+
+    <TextView
+        android:id="@+id/dialog_tip_content"
+        style="@style/dream_black_333333_16_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:minLines="2"
+        android:text="内容" />
+
+    <TextView
+        android:id="@+id/dialog_tip_content_2"
+        style="@style/dream_black_333333_16_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:layout_marginBottom="10dp"
+        android:textSize="30sp"
+        android:textColor="@color/dream_red_ff2600"
+        android:text="10" />
+
+
+</LinearLayout>

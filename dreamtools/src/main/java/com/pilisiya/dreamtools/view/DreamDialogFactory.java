@@ -41,6 +41,7 @@ public class DreamDialogFactory {
     private static TextView tvCount;
     private static LinearLayout llBtn;
     private static TextView tvMsg;
+    private static TextView tvTime;
     private static TextView tvOk;
     private static TextView tvTopCancel;
     private static TextView tvCancel;
@@ -275,6 +276,30 @@ public class DreamDialogFactory {
         return dialog;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static Dialog createDialog8(final Activity activity) {
+        dismissAlert(activity);
+        Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setContentView(R.layout.dream_timeout_tip);
+        dialog.setCancelable(false);
+        dialogs.put(activity.toString(), dialog);
+        tvTitle = dialog.findViewById(R.id.dialog_tip_title);
+        tvMsg = dialog.findViewById(R.id.dialog_tip_content);
+        tvTime = dialog.findViewById(R.id.dialog_tip_content_2);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog1.dismiss();
+                return false;
+            } else {
+                return false;
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
+    }
 
     /**
      * 【消息确认提示框，只有确认按钮，按返回键取消提示框】
@@ -830,6 +855,32 @@ public class DreamDialogFactory {
         }
         dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
         dialog.show();
+        //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void showTimeOut(final Activity context, String title, String msg, int timeout, DreamIBackListener listener) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog8(context);
+        tvTitle.setText(title);
+        tvMsg.setText(msg);
+        tvTime.setText(String.valueOf(timeout));
+        loadingTimer = new CountDownTimer(timeout, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tvTime.setText(String.valueOf(millisUntilFinished / 1000));
+            }
+
+            @Override
+            public void onFinish() {
+                dismissAlert(context);
+                listener.onBack();
+            }
+        };
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+        dialog.show();
+        loadingTimer.start();
         //屏蔽HOME键
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
     }
