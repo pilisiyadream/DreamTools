@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dream_bg_dialog"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="55dp">
+
+        <TextView
+            android:id="@+id/dialog_tip_title"
+            style="@style/dream_blue_0180c6_21_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="标题" />
+
+        <TextView
+            android:id="@+id/dialog_tip_time"
+            style="@style/dream_red_ff2600_21_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text="60"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/dream_blue_00b4f0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:gravity="center_vertical"
+            android:text="姓名"
+            android:textColor="@color/dream_black_333333"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/dialog_input_name"
+            style="@style/dream_black_333333_18_left"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:maxLength="20"
+            android:minLines="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:gravity="center_vertical"
+            android:text="身份证号"
+            android:textColor="@color/dream_black_333333"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/dialog_input_id"
+            style="@style/dream_black_333333_18_left"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:inputType="textVisiblePassword"
+            android:maxLength="18"
+            android:minLines="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_btn_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="46dp"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dialog_tip_cancel_btn"
+            style="@style/dream_white_22_center"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/dream_cancel_btn_bg"
+            android:text="取消" />
+
+        <TextView
+            android:id="@+id/dialog_tip_confirm_btn"
+            style="@style/dream_white_22_center"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/dream_confirm_btn_bg"
+            android:text="确定" />
+    </LinearLayout>
+
+</LinearLayout>

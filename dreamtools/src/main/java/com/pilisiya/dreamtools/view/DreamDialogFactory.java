@@ -19,6 +19,7 @@ import com.pilisiya.dreamtools.R;
 import com.pilisiya.dreamtools.listener.DreamChoosePayTypeListener;
 import com.pilisiya.dreamtools.listener.DreamIBackListener;
 import com.pilisiya.dreamtools.listener.DreamIOkListener;
+import com.pilisiya.dreamtools.listener.DreamIdListener;
 import com.pilisiya.dreamtools.util.CustomWindowFlag;
 import com.pilisiya.dreamtools.util.DreamConstant;
 import com.pilisiya.dreamtools.view.loading.ShapeLoadingDrawable;
@@ -47,7 +48,7 @@ public class DreamDialogFactory {
     private static TextView tvCancel;
     private static ProgressBar progressBar;
     private static ImageView line, img_cancel;
-    private static EditText ed_pass;
+    private static EditText ed_pass, ed_name, ed_id;
     private static TextView tv_bank, tv_scan, tv_amt, tv_face;
     private static ImageView iv_shape_loading, img_ok, img_error;
     private static CountDownTimer loadingTimer = null;
@@ -287,6 +288,36 @@ public class DreamDialogFactory {
         tvTitle = dialog.findViewById(R.id.dialog_tip_title);
         tvMsg = dialog.findViewById(R.id.dialog_tip_content);
         tvTime = dialog.findViewById(R.id.dialog_tip_content_2);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog1.dismiss();
+                return false;
+            } else {
+                return false;
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static Dialog createDialog9(final Activity activity) {
+        dismissAlert(activity);
+        Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setContentView(R.layout.dream_dialog_input_id);
+        dialog.setCancelable(false);
+        dialogs.put(activity.toString(), dialog);
+        tvTitle = dialog.findViewById(R.id.dialog_tip_title);
+        ed_name = dialog.findViewById(R.id.dialog_input_name);
+        ed_id = dialog.findViewById(R.id.dialog_input_id);
+        llBtn = dialog.findViewById(R.id.dialog_btn_ll);
+        tvMsg = dialog.findViewById(R.id.dialog_tip_content);
+        tvOk = dialog.findViewById(R.id.dialog_tip_confirm_btn);
+        tvCancel = dialog.findViewById(R.id.dialog_tip_cancel_btn);
         dialog.setOnKeyListener((dialog1, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_SEARCH) {
                 return true;
@@ -882,6 +913,39 @@ public class DreamDialogFactory {
         dialog.show();
         loadingTimer.start();
         //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void showInputId(final Activity context, String title, final DreamIdListener idClick, final View.OnClickListener cancleClick) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog9(context);
+        llBtn.setVisibility(View.VISIBLE);
+        tvTitle.setText(title);
+        tvOk.setText("确认");
+        tvCancel.setText("取消");
+        tvOk.setOnClickListener(v -> {
+            String name = ed_name.getText().toString();
+            String id = ed_id.getText().toString();
+            if (null != idClick) {
+                if (TextUtils.isEmpty(name)) {
+                    Toast.makeText(context, "请输入姓名", Toast.LENGTH_LONG).show();
+                } else if (TextUtils.isEmpty(id) || (id.length() != 18 && id.length() != 15)) {
+                    Toast.makeText(context, "请输入身份证号码", Toast.LENGTH_LONG).show();
+                } else {
+                    dismissAlert(context);
+                    idClick.onInputValue(name, id);
+                }
+            }
+        });
+        tvCancel.setOnClickListener(v -> {
+            if (cancleClick != null) {
+                dismissAlert(context);
+                cancleClick.onClick(v);
+            }
+        });
+        dialog.show();
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
     }
 

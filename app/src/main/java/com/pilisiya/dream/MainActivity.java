@@ -17,6 +17,7 @@ import com.ColorTextView;
 import com.orhanobut.logger.Logger;
 import com.pilisiya.dreamtools.listener.DreamIBackListener;
 import com.pilisiya.dreamtools.listener.DreamIOkListener;
+import com.pilisiya.dreamtools.listener.DreamIdListener;
 import com.pilisiya.dreamtools.util.DreamLogUtil;
 import com.pilisiya.dreamtools.util.DropDownUtil;
 import com.pilisiya.dreamtools.view.DreamDialogFactory;
@@ -255,9 +256,9 @@ public class MainActivity extends Activity {
 
         btn_20 = findViewById(R.id.btn_20);
         btn_20.setOnClickListener(view -> {
-            DreamDialogFactory.showTimeOut(this, "提示", "支付结果未知，稍后将发起查询", 10 * 1000, new DreamIBackListener() {
+            DreamDialogFactory.showInputId(this, "请输入缴款人身份信息", (name, id) -> DreamLogUtil.e("XU", "name:" + name + "id:" + id), new View.OnClickListener() {
                 @Override
-                public void onBack() {
+                public void onClick(View view) {
 
                 }
             });
