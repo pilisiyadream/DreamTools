@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginStart="10dp"
-            android:text="挥卡(3.0版本优先选)"
+            android:text="挥卡(三代卡)"
             android:textSize="22sp" />
     </LinearLayout>
 
