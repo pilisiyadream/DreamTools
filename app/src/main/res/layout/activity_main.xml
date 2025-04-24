@@ -213,6 +213,45 @@
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_21"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="局域网打印" />
+
+        <Button
+            android:id="@+id/btn_22"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_23"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_24"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+
+
     <com.pilisiya.dreamtools.view.circle.CircleImageView
         android:id="@+id/img_circle"
         android:layout_width="wrap_content"
@@ -234,11 +273,11 @@
     <!--        app:mv_width="350dp" />-->
 
 
-    <com.lidong.pdf.PDFView
-        android:id="@+id/pdf"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:visibility="gone" />
+<!--    <com.lidong.pdf.PDFView-->
+<!--        android:id="@+id/pdf"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:visibility="gone" />-->
 
     <com.ColorTextView
         android:id="@+id/tv_color"

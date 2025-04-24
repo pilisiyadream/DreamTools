@@ -332,6 +332,33 @@ public class DreamDialogFactory {
         return dialog;
     }
 
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static Dialog createDialog10(final Activity activity) {
+        dismissAlert(activity);
+        Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setContentView(R.layout.dream_dialog_social_choice);
+        dialog.setCancelable(false);
+        dialogs.put(activity.toString(), dialog);
+        tv_bank = dialog.findViewById(R.id.tv_insert);
+        tv_scan = dialog.findViewById(R.id.tv_hui);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog1.dismiss();
+                return false;
+            } else {
+                return false;
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
+    }
+
+
     /**
      * 【消息确认提示框，只有确认按钮，按返回键取消提示框】
      *
@@ -856,6 +883,26 @@ public class DreamDialogFactory {
             tv_scan.setOnClickListener(view -> {
                 dismissAlert(context);
                 listener.onChoice(DreamConstant.PAY_TYPE_SCAN);
+            });
+        }
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+        dialog.show();
+        //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void chooseSocialCardType(final Activity context, DreamChoosePayTypeListener listener) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog10(context);
+        if (listener != null) {
+            tv_bank.setOnClickListener(view -> {
+                dismissAlert(context);
+                listener.onChoice(DreamConstant.PAY_TYPE_INSERT);
+            });
+            tv_scan.setOnClickListener(view -> {
+                dismissAlert(context);
+                listener.onChoice(DreamConstant.PAY_TYPE_HUI);
             });
         }
         dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
