@@ -44,7 +44,7 @@
             android:layout_height="55dp"
             android:layout_marginStart="10dp"
             android:text="插卡"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
         <View
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
             android:layout_height="55dp"
             android:layout_marginStart="10dp"
             android:text="内置挥卡(三代卡)"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -70,7 +70,7 @@
             android:layout_height="55dp"
             android:layout_marginStart="10dp"
             android:text="外置挥卡(三代卡)"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
 
