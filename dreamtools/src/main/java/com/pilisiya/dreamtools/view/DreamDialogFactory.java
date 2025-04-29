@@ -49,7 +49,7 @@ public class DreamDialogFactory {
     private static ProgressBar progressBar;
     private static ImageView line, img_cancel;
     private static EditText ed_pass, ed_name, ed_id;
-    private static TextView tv_bank, tv_scan, tv_amt, tv_face;
+    private static TextView tv_bank, tv_scan, tv_amt, tv_face, tv_hui;
     private static ImageView iv_shape_loading, img_ok, img_error;
     private static CountDownTimer loadingTimer = null;
 
@@ -333,7 +333,6 @@ public class DreamDialogFactory {
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private static Dialog createDialog10(final Activity activity) {
         dismissAlert(activity);
@@ -344,6 +343,31 @@ public class DreamDialogFactory {
         dialogs.put(activity.toString(), dialog);
         tv_bank = dialog.findViewById(R.id.tv_insert);
         tv_scan = dialog.findViewById(R.id.tv_hui);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog1.dismiss();
+                return false;
+            } else {
+                return false;
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static Dialog createDialog11(final Activity activity) {
+        dismissAlert(activity);
+        Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setContentView(R.layout.dream_dialog_social_choice_2);
+        dialog.setCancelable(false);
+        dialogs.put(activity.toString(), dialog);
+        tv_bank = dialog.findViewById(R.id.tv_insert);
+        tv_scan = dialog.findViewById(R.id.tv_hui);
+        tv_hui = dialog.findViewById(R.id.tv_hui_2);
         dialog.setOnKeyListener((dialog1, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_SEARCH) {
                 return true;
@@ -910,6 +934,32 @@ public class DreamDialogFactory {
         //屏蔽HOME键
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void chooseSocialCardType2(final Activity context, DreamChoosePayTypeListener listener) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog11(context);
+        if (listener != null) {
+            tv_bank.setOnClickListener(view -> {
+                dismissAlert(context);
+                listener.onChoice(DreamConstant.PAY_TYPE_INSERT);
+            });
+            tv_scan.setOnClickListener(view -> {
+                dismissAlert(context);
+                listener.onChoice(DreamConstant.PAY_TYPE_HUI);
+            });
+            tv_hui.setOnClickListener(view -> {
+                dismissAlert(context);
+                listener.onChoice(DreamConstant.PAY_TYPE_HUI_2);
+            });
+        }
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> false);
+        dialog.show();
+        //屏蔽HOME键
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void choosePayType2(final Activity context, String amt, DreamChoosePayTypeListener listener) {

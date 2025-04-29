@@ -13,4 +13,5 @@ public class DreamConstant {
 
     public static final int PAY_TYPE_INSERT = 1;
     public static final int PAY_TYPE_HUI = 2;
+    public static final int PAY_TYPE_HUI_2 = 3;
 }
