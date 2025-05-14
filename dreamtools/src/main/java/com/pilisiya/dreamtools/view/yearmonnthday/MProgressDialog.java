@@ -32,7 +32,7 @@ public class MProgressDialog {
 
     private static void initDialog(Context mContext) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View mProgressDialogView = inflater.inflate(R.layout.dream__progress_dialog_layout, null);// 得到加载view
+        View mProgressDialogView = inflater.inflate(R.layout.dream_progress_dialog_layout, null);// 得到加载view
         mDialog = new Dialog(mContext, R.style.dream_customDialog);// 创建自定义样式dialog
         mDialog.setCancelable(false);// 不可以用“返回键”取消
         mDialog.setCanceledOnTouchOutside(false);
