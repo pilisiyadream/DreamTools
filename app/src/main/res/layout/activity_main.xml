@@ -231,6 +231,7 @@
             android:id="@+id/btn_22"
             style="@style/ButtonStyle"
             android:layout_width="0dp"
+            android:text="数据输入"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
