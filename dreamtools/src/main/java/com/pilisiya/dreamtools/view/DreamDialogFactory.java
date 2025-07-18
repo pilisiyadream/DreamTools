@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ public class DreamDialogFactory {
     private static TextView tv_bank, tv_scan, tv_amt, tv_face, tv_hui;
     private static ImageView iv_shape_loading, img_ok, img_error;
     private static CountDownTimer loadingTimer = null;
+    private static RelativeLayout relScan, relBank;
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -393,6 +395,36 @@ public class DreamDialogFactory {
         dialogs.put(activity.toString(), dialog);
         tv_bank = dialog.findViewById(R.id.tv_insert);
         tv_scan = dialog.findViewById(R.id.tv_hui);
+        dialog.setOnKeyListener((dialog1, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog1.dismiss();
+                return false;
+            } else {
+                return false;
+            }
+        });
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
+    }
+
+
+    private static Dialog createDialog13(final Activity activity) {
+        dismissAlert(activity);
+        Dialog dialog = new Dialog(activity, R.style.dream_dialog_basic);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.setContentView(R.layout.dream_dialog_choice_pay_type);
+        dialog.setCancelable(false);
+        dialogs.put(activity.toString(), dialog);
+        tvTitle = dialog.findViewById(R.id.dialog_tip_title);
+        tvTopCancel = dialog.findViewById(R.id.dialog_top_back);
+        tvCount = dialog.findViewById(R.id.dialog_tip_time);
+        llBtn = dialog.findViewById(R.id.dialog_btn_ll);
+        tvMsg = dialog.findViewById(R.id.dialog_tip_content);
+        relBank = dialog.findViewById(R.id.rel_bank);
+        line = dialog.findViewById(R.id.line);
+        relScan = dialog.findViewById(R.id.rel_saoyisao);
         dialog.setOnKeyListener((dialog1, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_SEARCH) {
                 return true;
@@ -984,6 +1016,7 @@ public class DreamDialogFactory {
         //屏蔽HOME键
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
     }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void chooseSocialCardType3(final Activity context, DreamChoosePayTypeListener listener) {
         clearBeforeDialog(context);
@@ -1089,6 +1122,32 @@ public class DreamDialogFactory {
         dialog.show();
         CustomWindowFlag.disableHomeKey(dialog.getWindow());
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void choicePayTypeDialog(final Activity context, String title, String msg, final View.OnClickListener okClick, final View.OnClickListener cancleClick) {
+        clearBeforeDialog(context);
+        Dialog dialog = createDialog13(context);
+        llBtn.setVisibility(View.VISIBLE);
+        tvCount.setVisibility(View.GONE);
+        tvTitle.setText(title);
+        tvMsg.setText(msg);
+        relBank.setOnClickListener(v -> {
+            dismissAlert(context);
+            if (null != okClick) {
+                okClick.onClick(v);
+            }
+        });
+        relScan.setOnClickListener(v -> {
+            dismissAlert(context);
+            if (null != cancleClick) {
+                cancleClick.onClick(v);
+            }
+        });
+        dialog.show();
+        CustomWindowFlag.disableHomeKey(dialog.getWindow());
+    }
+
 
     /**
      * @param activity

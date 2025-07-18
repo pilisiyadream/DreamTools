@@ -12,4 +12,5 @@
     <color name="dream_black_333333">#333333</color>
     <color name="dream_line_color">#cccccc</color>
     <color name="dream_normal_color">#00B596</color>
+    <color name="red">#FF0000</color>
 </resources>

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 
 import com.ColorTextView;
 import com.orhanobut.logger.Logger;
+import com.pilisiya.dreamtools.listener.DreamChoosePayTypeListener;
 import com.pilisiya.dreamtools.listener.DreamIBackListener;
 import com.pilisiya.dreamtools.listener.DreamIOkListener;
 import com.pilisiya.dreamtools.listener.DreamIdListener;
@@ -294,7 +295,12 @@ public class MainActivity extends Activity {
         btn_22.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DreamDialogFactory.showInputPass(MainActivity.this, "请输入主管密码", "260089", "确认", "取消", new View.OnClickListener() {
+                DreamDialogFactory.choicePayTypeDialog(MainActivity.this, "请选择支付方式", "卡号：123456", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                }, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
