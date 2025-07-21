@@ -1133,13 +1133,11 @@ public class DreamDialogFactory {
         tvTitle.setText(title);
         tvMsg.setText(msg);
         relBank.setOnClickListener(v -> {
-            dismissAlert(context);
             if (null != okClick) {
                 okClick.onClick(v);
             }
         });
         relScan.setOnClickListener(v -> {
-            dismissAlert(context);
             if (null != cancleClick) {
                 cancleClick.onClick(v);
             }

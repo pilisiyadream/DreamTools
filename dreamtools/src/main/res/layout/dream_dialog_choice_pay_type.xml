@@ -54,7 +54,9 @@
         style="@style/dream_black_333333_20_left"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
         android:minLines="1"
         android:text="内容" />
 
@@ -87,12 +89,13 @@
                 android:id="@+id/img_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:src="@drawable/saoyisao" />
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/img_1"
@@ -115,12 +118,15 @@
                 android:id="@+id/img_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:src="@drawable/bg_bank" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
                 android:layout_toRightOf="@+id/img_2"
                 android:gravity="center"
                 android:text="银行卡"
