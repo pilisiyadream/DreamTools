@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:src="@drawable/saoyisao" />
@@ -101,6 +101,7 @@
                 android:layout_toRightOf="@+id/img_1"
                 android:gravity="center_vertical"
                 android:text="扫一扫"
+                android:layout_marginStart="6dp"
                 android:textColor="@drawable/text_color_state"
                 android:textSize="18sp" />
         </RelativeLayout>
@@ -119,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:src="@drawable/bg_bank" />
@@ -129,6 +130,7 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/img_2"
                 android:gravity="center"
+                android:layout_marginStart="6dp"
                 android:text="银行卡"
                 android:textColor="@drawable/text_color_state"
                 android:textSize="18sp" />
